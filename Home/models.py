@@ -1,14 +1,14 @@
 from django.db import models
 
-# IntegerRangeField Definition
-class IntegerRangeField(models.IntegerField):
-    def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
-        self.min_value, self.max_value = min_value, max_value
-        models.IntegerField.__init__(self, verbose_name, name, **kwargs)
-    def formfield(self, **kwargs):
-        defaults = {'min_value': self.min_value, 'max_value':self.max_value}
-        defaults.update(kwargs)
-        return super(IntegerRangeField, self).formfield(**defaults)
+# # IntegerRangeField Definition
+# class IntegerRangeField(models.IntegerField):
+#     def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
+#         self.min_value, self.max_value = min_value, max_value
+#         models.IntegerField.__init__(self, verbose_name, name, **kwargs)
+#     def formfield(self, **kwargs):
+#         defaults = {'min_value': self.min_value, 'max_value':self.max_value}
+#         defaults.update(kwargs)
+#         return super(IntegerRangeField, self).formfield(**defaults)
 
 # Create your models here.
 class Country (models.Model):    
@@ -26,12 +26,12 @@ class City (models.Model):
 
 
 class Terminal (models.Model):    
-    TransportType=(
-        ('BUS','Bu'),
-        ('TRAIN', 'Tr'),
-        ('AIR_PLAN', 'Pl'),
+    TRANSPORTTYPE=(
+        ('Bu','BUS'),
+        ('Tr','TRAIN'),
+        ('Pl','AIR_PLAN'),
     )
-    type = models.CharField ( max_length=2,choises=TransportType.choises )
+    type = models.CharField ( max_length=2,choices=TRANSPORTTYPE )
     city = models.ForeignKey ( City,on_delete=models.CASCADE )
     terminalname = models.CharField ( max_length=50 )
 
@@ -39,16 +39,15 @@ class Terminal (models.Model):
 class TransportCo (models.Model):    
     name = models.CharField ( max_length=50 )
     logo = models.ImageField ( blank=True,null=True,upload_to=None )
-    userscore = models.PositiveIntegerField ( blank=True,null=True, )
     address = models.TextField ( blank=True,null=True, )
     telnum = models.CharField ( blank=True,null=True,max_length=15 )
     userscore = models.PositiveIntegerField ( blank=True,null=True )
 
 
 class Extradition (models.Model):  
-    exno = models.CharField( max_lenth=10 )  
+    exno = models.CharField( max_length=10 )  
     remainingtime = models.DurationField (  )
-    percent = models.fields.IntegerRangeField ( min_value=1, max_value=100 )
+    percent = models.PositiveIntegerField()
 
 
 class Transport (models.Model): 
@@ -56,28 +55,28 @@ class Transport (models.Model):
     company = models.ForeignKey ( TransportCo,on_delete=models.CASCADE )
     starttime = models.DateTimeField (  )
     recivetime = models.DateTimeField (  )
-    beginning = models.ForeignKey ( Terminal,on_delete=models.CASCADE )
-    distinaton = models.ForeignKey ( Terminal,on_delete=models.CASCADE )
+    beginning = models.ForeignKey ( Terminal,on_delete=models.CASCADE,related_name='beginning' )
+    distinaton = models.ForeignKey ( Terminal,on_delete=models.CASCADE,related_name='distinaton' )
     capacityadult = models.PositiveIntegerField (  )
     adultprice = models.PositiveIntegerField ( blank=True,null=True )
     childprice = models.PositiveIntegerField ( blank=True,null=True )
     babyprice = models.PositiveIntegerField ( blank=True,null=True )
     stars = models.PositiveIntegerField ( blank=True,null=True )
-    discount = models.fields.IntegerRangeField ( blank=True,null=True,min_value=1, max_value=100 )
+    discount = models.fields.PositiveIntegerField ( blank=True,null=True )
     userscore = models.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
-    extradition = models.ForeignKey(Extradition,on_delete=models.CASCADE,relation='sa')
+    extradition = models.ManyToManyField( Extradition,related_name='tr_exno' )
 
 
 class Residence (models.Model): 
-    ResideceType=(
-        ('HOTEL','Ho'),
-        ('MOTEL', 'Mo'),
-        ('HAUSE', 'HA'),
-        ('SUIT','Su'),
+    RESIDENCE_TYPE=(
+        ('Ho','HOTEL'),
+        ('Mo','MOTEL'),
+        ('HA','HAUSE'),
+        ('Su','SUIT'),
     )   
     name = models.CharField ( max_length=50 )
-    type = models.CharField ( max_length=2,choises=ResideceType.choises )
+    type = models.CharField ( max_length=2,choices=RESIDENCE_TYPE )
     address = models.TextField (  )
     telnum = models.CharField ( max_length=15 )
     logo = models.ImageField ( blank=True,null=True,upload_to=None )
@@ -91,24 +90,24 @@ class Room (models.Model):
     adultprice = models.PositiveIntegerField (  )
     childprice = models.PositiveIntegerField (  )
     babyprice = models.PositiveIntegerField (  )
-    discount = models.fields.IntegerRangeField ( blank=True,null=True,min_value=1, max_value=100 )
+    discount = models.fields.PositiveIntegerField ( blank=True,null=True )
     adultcapacity = models.PositiveIntegerField (  )
     userscore = models.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
-    extradition = models.ManyToManyField( Extradition,on_delete=models.CASCADE,related_name='exno' )
+    extradition = models.ManyToManyField( Extradition,related_name='ro_exno' )
 
 
 class Tour (models.Model):    
     name = models.CharField ( max_length=50 )
-    transportGo = models.ForeignKey ( Transport,on_delete=models.CASCADE )
-    transportBack = models.ForeignKey ( Transport,on_delete=models.CASCADE )
+    transportGo = models.ForeignKey ( Transport,on_delete=models.CASCADE,related_name='tr_go' )
+    transportBack = models.ForeignKey ( Transport,on_delete=models.CASCADE,related_name='tr_ba' )
     hotel = models.ForeignKey ( Room,on_delete=models.CASCADE )
-    userscore = models.PositiveIntegerField (  )
+    userscore = models.PositiveIntegerField ( blank=True,null=True )
     description = models.TextField ( blank=True,null=True, )
     price = models.PositiveIntegerField (  )
-    discount = models.fields.IntegerRangeField ( blank=True,null=True,min_value=1, max_value=100 )
+    discount = models.fields.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
-    extradition = models.ForeignKey(Extradition,on_delete=models.CASCADE,relation='sa')
+    extradition = models.ManyToManyField( Extradition,related_name='to_exno' )
 
 
 
