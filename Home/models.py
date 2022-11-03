@@ -66,6 +66,7 @@ class Transport (models.Model):
     userscore = models.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
     extradition = models.ManyToManyField( Extradition,related_name='tr_exno' )
+    capacity = models.PositiveBigIntegerField(blank=True,null=True)
 
 
 class Residence (models.Model): 
@@ -81,6 +82,7 @@ class Residence (models.Model):
     telnum = models.CharField ( max_length=15 )
     logo = models.ImageField ( blank=True,null=True,upload_to=None )
     userscore = models.PositiveIntegerField ( blank=True,null=True, )
+    capacity = models.PositiveBigIntegerField(blank=True,null=True)
 
 
 class Room (models.Model):    
@@ -95,6 +97,7 @@ class Room (models.Model):
     userscore = models.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
     extradition = models.ManyToManyField( Extradition,related_name='ro_exno' )
+    capacity = models.PositiveBigIntegerField(blank=True,null=True)
 
 
 class Tour (models.Model):    
@@ -108,6 +111,7 @@ class Tour (models.Model):
     discount = models.fields.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
     extradition = models.ManyToManyField( Extradition,related_name='to_exno' )
+    capacity = models.PositiveBigIntegerField(blank=True,null=True)
 
 
 
