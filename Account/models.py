@@ -21,6 +21,9 @@ class CustomUser (AbstractUser):
     gender  = models.BooleanField ( blank=True,null=True )
     status = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.email
+
 
 class Walet (models.Model):
     deposit  = models.PositiveIntegerField ( blank=True,null=True )
@@ -30,6 +33,9 @@ class Walet (models.Model):
     amount  = models.PositiveIntegerField (  )
     user  = models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
     cash  = models.PositiveIntegerField (  )
+
+    def __str__(self):
+        return self.amount
 
 
 class Score (models.Model):
@@ -41,6 +47,9 @@ class Score (models.Model):
     user  = models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
     cash  = models.PositiveIntegerField (  )
 
+    def __str__(self):
+        return self.description
+
 
 class Bank_deposit (models.Model):
     bank  = models.CharField ( max_length=50 )
@@ -48,6 +57,9 @@ class Bank_deposit (models.Model):
     sheba  = models.CharField ( blank=True,null=True,max_length=50 )
     cardnumber  = models.CharField ( blank=True,null=True,max_length=50 )
     depositnumber  = models.CharField ( blank=True,null=True,max_length=50 )
+
+    def __str__(self):
+        return self.depositnumber
 
 
 class Userscore (models.Model):
@@ -59,3 +71,6 @@ class Userscore (models.Model):
     rate  = models.PositiveIntegerField (  )
     description  = models.TextField (  )
     user  = models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.rate

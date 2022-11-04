@@ -14,6 +14,9 @@ class Order (models.Model):
     baby=models.PositiveIntegerField(blank=True,null=True)
     user  =  models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
 
+    def __str__(self):
+        return self.orderno
+
 
 class OrderStatus (models.Model):
     ORDERSTATE=(
@@ -24,6 +27,9 @@ class OrderStatus (models.Model):
     )
     order = models.ForeignKey( Order,on_delete=models.CASCADE )
     status  =  models.CharField ( max_length=2,choices=ORDERSTATE )
+
+    def __str__(self):
+        return self.order
 
 
 class RefundRequest (models.Model):
@@ -36,6 +42,9 @@ class RefundRequest (models.Model):
     refundtime  =  models.DateTimeField ( auto_now_add=True )
     refundprice  =  models.PositiveIntegerField (  )
     status  =  models.CharField ( max_length=2,choices=REFUND )
+
+    def __str__(self):
+        return self.Order_number
 
 
 class Cart (models.Model):     

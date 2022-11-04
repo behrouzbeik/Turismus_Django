@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # # IntegerRangeField Definition
 # class IntegerRangeField(models.IntegerField):
@@ -14,18 +15,31 @@ from django.db import models
 class Country (models.Model):    
     country = models.CharField ( max_length=50 )
 
+    def __str__(self):
+        return self.country
+
 
 class State (models.Model):    
     country = models.ForeignKey ( Country,on_delete=models.CASCADE )
     state = models.CharField ( max_length=50 )
 
+    def __str__(self):
+        return self.state
+
 
 class City (models.Model):    
-    state = models.ForeignKey ( State,on_delete=models.CASCADE )
-    city = models.CharField ( max_length=50 )
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    city = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='City', blank=True, null=True)
+    home_page_display = models.BooleanField(default=False)
+    short_description = models.CharField(max_length=25, blank=True, null=True)
+
+    def __str__(self):
+        return self.city
 
 
-class Terminal (models.Model):    
+
+class Terminal (models.Model):
     TRANSPORTTYPE=(
         ('Bu','BUS'),
         ('Tr','TRAIN'),
@@ -35,6 +49,9 @@ class Terminal (models.Model):
     city = models.ForeignKey ( City,on_delete=models.CASCADE )
     terminalname = models.CharField ( max_length=50 )
 
+    def __str__(self):
+        return self.terminalname
+
 
 class TransportCo (models.Model):    
     name = models.CharField ( max_length=50 )
@@ -43,11 +60,17 @@ class TransportCo (models.Model):
     telnum = models.CharField ( blank=True,null=True,max_length=15 )
     userscore = models.PositiveIntegerField ( blank=True,null=True )
 
+    def __str__(self):
+        return self.name
+
 
 class Extradition (models.Model):  
     exno = models.CharField( max_length=10 )  
     remainingtime = models.DurationField (  )
     percent = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.exno
 
 
 class Transport (models.Model): 
@@ -68,6 +91,9 @@ class Transport (models.Model):
     extradition = models.ManyToManyField( Extradition,related_name='tr_exno' )
     capacity = models.PositiveBigIntegerField(blank=True,null=True)
 
+    def __str__(self):
+        return self.transportCode
+
 
 class Residence (models.Model): 
     RESIDENCE_TYPE=(
@@ -84,6 +110,9 @@ class Residence (models.Model):
     userscore = models.PositiveIntegerField ( blank=True,null=True, )
     capacity = models.PositiveBigIntegerField(blank=True,null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Room (models.Model):    
     residence = models.ForeignKey ( Residence,on_delete=models.CASCADE )
@@ -99,6 +128,9 @@ class Room (models.Model):
     extradition = models.ManyToManyField( Extradition,related_name='ro_exno' )
     capacity = models.PositiveBigIntegerField(blank=True,null=True)
 
+    def __str__(self):
+        return self.residence.name
+
 
 class Tour (models.Model):    
     name = models.CharField ( max_length=50 )
@@ -113,5 +145,17 @@ class Tour (models.Model):
     extradition = models.ManyToManyField( Extradition,related_name='to_exno' )
     capacity = models.PositiveBigIntegerField(blank=True,null=True)
 
+    def __str__(self):
+        return self.name
+
+class MyCompanyInfo (models.Model):
+    company_name = models.CharField(max_length=50, default='#')
+    email = models.EmailField()
+    phon_number = models.CharField(max_length=55)
+    facebook = models.CharField(max_length=100, default='#')
+    twiter = models.CharField(max_length=100, default='#')
+    linkedin = models.CharField(max_length=100, default='#')
+    insta = models.CharField(max_length=100, default='#')
+    utube = models.CharField(max_length=100, default='#')
 
 
