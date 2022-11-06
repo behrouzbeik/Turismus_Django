@@ -10,7 +10,10 @@ class StateAdmin(admin.ModelAdmin):
     pass
 
 class CityAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['state','city','image' , 'home_page_display' , 'short_description']
+    # inlines = [city,image]
+    list_editable = ('home_page_display',)
+    
 
 class TerminalAdmin(admin.ModelAdmin):
     pass
@@ -31,7 +34,10 @@ class RoomAdmin(admin.ModelAdmin):
     pass
 
 class TourAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name','hotel','price' , 'discount' , 'buyscore', 'capacity', 'home_page_display']
+    # inlines = [city,image]
+    list_editable = ('home_page_display', 'capacity')
+    
 
 class MyCompanyInfoAdmin(admin.ModelAdmin):
     pass

@@ -137,6 +137,7 @@ class Tour (models.Model):
     transportGo = models.ForeignKey ( Transport,on_delete=models.CASCADE,related_name='tr_go' )
     transportBack = models.ForeignKey ( Transport,on_delete=models.CASCADE,related_name='tr_ba' )
     hotel = models.ForeignKey ( Room,on_delete=models.CASCADE )
+    image = models.ImageField (upload_to='Tour', blank=True, null=True)
     userscore = models.PositiveIntegerField ( blank=True,null=True )
     description = models.TextField ( blank=True,null=True, )
     price = models.PositiveIntegerField (  )
@@ -144,6 +145,8 @@ class Tour (models.Model):
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
     extradition = models.ManyToManyField( Extradition,related_name='to_exno' )
     capacity = models.PositiveBigIntegerField(blank=True,null=True)
+    home_page_display = models.BooleanField(default=False)
+    short_description = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.name

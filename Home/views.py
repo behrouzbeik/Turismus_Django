@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from .models import MyCompanyInfo,City
+from .models import MyCompanyInfo,City,Tour
 
 # Create your views here.
 
 def index(request):
     myCompanyInfo = MyCompanyInfo.objects.get(company_name='Behrouz Travel')
-    cities = City.objects.filter(home_page_display=True)
+    cities = City.objects.filter(home_page_display=True).order_by('-id')[:6]
+    tour = Tour.objects.filter(home_page_display=True).order_by('-id')[:6]
     context = {
         'title': myCompanyInfo.company_name,
         'email': myCompanyInfo.email,
@@ -23,6 +24,7 @@ def index(request):
         'Services': 'Services',
         'Menu': 'Menu',
         'cities':cities,
+        'tour':tour,
     }
     return (render(request,'Home/index.html', context))
 
