@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load djmoney %}
 {% block static%}
 
     <!-- Favicon <link href="img/favicon.ico" rel="icon">-->
@@ -65,10 +66,10 @@
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
                                     <select class="custom-select px-4" style="height: 47px;">
-                                        <option selected>Destination</option>
-                                        <option value="1">Destination 1</option>
-                                        <option value="2">Destination 1</option>
-                                        <option value="3">Destination 1</option>
+                                        <option value="" disabled selected>Destination City</option>
+                                        {% for d in destinations %}
+                                        <option value="1">{{ d.city }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -257,14 +258,14 @@
                         <div class="p-4">
                             <div class="d-flex justify-content-between mb-3">
                                 <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{ t.transportGo.distinaton.city.city }}</small>
-                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
+                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>{{ t.tour_duration }} days</small>
                                 <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>{{ t.capacity }}</small>
                             </div>
                             <a class="h5 text-decoration-none" href="">{{ t.short_description }}</a>
                             <div class="border-top mt-4 pt-4">
                                 <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">{{ t.price }}</h5>
+                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>{{ t.userscore }} <small>(250)</small></h6>
+                                    <h6 class="m-0">{% money_localize t.price %} </h6>
                                 </div>
                             </div>
                         </div>

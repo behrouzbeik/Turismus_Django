@@ -6,6 +6,7 @@ from .models import MyCompanyInfo,City,Tour
 def index(request):
     myCompanyInfo = MyCompanyInfo.objects.get(company_name='Behrouz Travel')
     cities = City.objects.filter(home_page_display=True).order_by('-id')[:6]
+    destinations = City.objects.all()
     tour = Tour.objects.filter(home_page_display=True).order_by('-id')[:6]
     context = {
         'title': myCompanyInfo.company_name,
@@ -16,7 +17,7 @@ def index(request):
         'linkedin': myCompanyInfo.linkedin,
         'insta': myCompanyInfo.insta,
         'utube': myCompanyInfo.utube,
-        'Lang': 'De',
+        'destinations': destinations,
         'SignIn': 'Sign In',
         'SignOut': 'SignOut',
         'SignUp': 'SignUp',

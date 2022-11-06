@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Home.apps.HomeConfig',
     'Account.apps.AccountConfig',
     'Cart.apps.CartConfig',
+    'djmoney',
 
 
 ]

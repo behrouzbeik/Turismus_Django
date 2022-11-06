@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from djmoney.models.fields import MoneyField
 
 # # IntegerRangeField Definition
 # class IntegerRangeField(models.IntegerField):
@@ -29,7 +30,7 @@ class State (models.Model):
 
 class City (models.Model):    
     state = models.ForeignKey(State, on_delete=models.CASCADE)
-    city = models.CharField(max_length=50)
+    city = models.CharField(max_length=50, unique=True)
     image = models.ImageField(upload_to='City', blank=True, null=True)
     home_page_display = models.BooleanField(default=False)
     short_description = models.CharField(max_length=25, blank=True, null=True)
@@ -80,7 +81,6 @@ class Transport (models.Model):
     recivetime = models.DateTimeField (  )
     beginning = models.ForeignKey ( Terminal,on_delete=models.CASCADE,related_name='beginning' )
     distinaton = models.ForeignKey ( Terminal,on_delete=models.CASCADE,related_name='distinaton' )
-    capacityadult = models.PositiveIntegerField (  )
     adultprice = models.PositiveIntegerField ( blank=True,null=True )
     childprice = models.PositiveIntegerField ( blank=True,null=True )
     babyprice = models.PositiveIntegerField ( blank=True,null=True )
@@ -122,7 +122,6 @@ class Room (models.Model):
     childprice = models.PositiveIntegerField (  )
     babyprice = models.PositiveIntegerField (  )
     discount = models.fields.PositiveIntegerField ( blank=True,null=True )
-    adultcapacity = models.PositiveIntegerField (  )
     userscore = models.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
     extradition = models.ManyToManyField( Extradition,related_name='ro_exno' )
@@ -138,9 +137,9 @@ class Tour (models.Model):
     transportBack = models.ForeignKey ( Transport,on_delete=models.CASCADE,related_name='tr_ba' )
     hotel = models.ForeignKey ( Room,on_delete=models.CASCADE )
     image = models.ImageField (upload_to='Tour', blank=True, null=True)
-    userscore = models.PositiveIntegerField ( blank=True,null=True )
+    userscore = models.FloatField(default=0)
     description = models.TextField ( blank=True,null=True, )
-    price = models.PositiveIntegerField (  )
+    price = MoneyField(max_digits=14, decimal_places=2, default_currency='IRR')
     discount = models.fields.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
     extradition = models.ManyToManyField( Extradition,related_name='to_exno' )
@@ -150,6 +149,10 @@ class Tour (models.Model):
 
     def __str__(self):
         return self.name
+
+    def tour_duration(self):
+        timediff = self.transportBack.recivetime - self.transportGo.starttime
+        return timediff.days
 
 class MyCompanyInfo (models.Model):
     company_name = models.CharField(max_length=50, default='#')
