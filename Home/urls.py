@@ -10,6 +10,7 @@ urlpatterns = [
     path('About', views.about, name='about'),
     path('Services', views.services, name='services'),
     path('Package', views.package, name='package'),
+    path('Residence', views.residence, name='residence'),
 
     # # ex: /polls/5/
     # path('<int:question_id>/', views.detail, name='detail'),

@@ -48,11 +48,12 @@
                         <a href="{% url 'Home:index' %}" class="nav-item nav-link active">Home</a>
                         <a href="{% url 'Home:about' %}" class="nav-item nav-link">About</a>
                         <a href="{% url 'Home:services' %}" class="nav-item nav-link">Services</a>
-                        <a href="{% url 'Home:package' %}" class="nav-item nav-link">Tour Packages</a>
+                        <a href="blog.html" class="nav-item nav-link">Blog</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pakages</a>
                             <div class="dropdown-menu border-0 rounded-0 m-0">
-                                <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                                <a href="{% url 'Home:package' %}" class="dropdown-item">Tour Packages</a>
+                                <a href="{% url 'Home:residence' %}" class="dropdown-item">Hotel and Residence</a>
                                 <a href="single.html" class="dropdown-item">Blog Detail</a>
                                 <a href="destination.html" class="dropdown-item">Destination</a>
                                 <a href="guide.html" class="dropdown-item">Travel Guides</a>

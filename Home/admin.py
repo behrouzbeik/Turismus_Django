@@ -28,10 +28,14 @@ class TransportAdmin(admin.ModelAdmin):
     pass
 
 class ResidenceAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name','city','logo' , 'telnum' , 'graid_star']
+    # inlines = [city,image]
+    list_editable = ('graid_star',)
 
 class RoomAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['residence','adultprice','childprice' , 'babyprice' , 'buyscore', 'capacity']
+    # inlines = [ResidenceAdmin]
+    list_editable = ('adultprice','childprice' , 'babyprice' , 'buyscore', 'capacity')
 
 class TourAdmin(admin.ModelAdmin):
     list_display = ['name','hotel','price' , 'discount' , 'buyscore', 'capacity', 'home_page_display']
