@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Account.apps.AccountConfig',
     'Cart.apps.CartConfig',
     'djmoney',
+    'django_filters',
 
 
 ]

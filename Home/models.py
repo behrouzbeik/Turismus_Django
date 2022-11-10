@@ -102,6 +102,15 @@ class Residence (models.Model):
         ('HA','HAUSE'),
         ('Su','SUIT'),
     )   
+    GSTAR=(
+        (1,'1'),
+        (2,'2'),
+        (3,'3'),
+        (4,'4'),
+        (5,'5'),
+        (6,'6'),
+        (7,'7'),
+    )
     name = models.CharField ( max_length=50 )
     type = models.CharField ( max_length=2,choices=RESIDENCE_TYPE )
     city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True,null=True)
@@ -109,7 +118,7 @@ class Residence (models.Model):
     telnum = models.CharField ( max_length=15 )
     logo = models.ImageField ( blank=True,null=True,upload_to='logo' )
     image = models.ImageField ( blank=True,null=True,upload_to=None )
-    graid_star=models.PositiveBigIntegerField(blank=True,null=True)
+    graid_star=models.PositiveBigIntegerField(choices=GSTAR, default=0, blank=True,null=True)
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
     userscore = models.PositiveIntegerField ( blank=True,null=True, )
     capacity = models.PositiveBigIntegerField(blank=True,null=True)
