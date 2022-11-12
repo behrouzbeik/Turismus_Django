@@ -11,6 +11,7 @@ urlpatterns = [
     path('Services', views.services, name='services'),
     path('Package', views.package, name='package'),
     path('Residence', views.residence, name='residence'),
+    path('Transport', views.transport, name='transport'),
 
     # # ex: /polls/5/
     # path('<int:question_id>/', views.detail, name='detail'),

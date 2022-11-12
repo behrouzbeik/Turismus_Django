@@ -45,6 +45,7 @@ class Terminal (models.Model):
         ('Bu','BUS'),
         ('Tr','TRAIN'),
         ('Pl','AIR_PLAN'),
+        ('Cr','CRUISE'),
     )
     type = models.CharField ( max_length=2,choices=TRANSPORTTYPE )
     city = models.ForeignKey ( City,on_delete=models.CASCADE )
@@ -80,7 +81,7 @@ class Transport (models.Model):
     starttime = models.DateTimeField (  )
     recivetime = models.DateTimeField (  )
     beginning = models.ForeignKey ( Terminal,on_delete=models.CASCADE,related_name='beginning' )
-    distinaton = models.ForeignKey ( Terminal,on_delete=models.CASCADE,related_name='distinaton' )
+    distination = models.ForeignKey ( Terminal,on_delete=models.CASCADE,related_name='distinaton' )
     adultprice = models.PositiveIntegerField ( blank=True,null=True )
     childprice = models.PositiveIntegerField ( blank=True,null=True )
     babyprice = models.PositiveIntegerField ( blank=True,null=True )
