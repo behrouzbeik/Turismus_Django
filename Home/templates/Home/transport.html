@@ -25,13 +25,13 @@
             <div class="col-lg-9">
                 <div class="row pb-3">
                     <div class="col-md-12 mb-4 pb-2">
-                        {% for r in residence %}
+                        {% for t in transport %}
                         <div class="blog-item d-flex mb-4">
                             <div class="position-relative col-md-3 pl-0">
-                                <img class="img-fluid w-100" src="{{ r.logo.url }}" alt="{{ r.name }}">
+                                <img class="img-fluid w-100" src="{{ t.company.logo.url }}" alt="{{ t.company.name }}">
                                 <div class="blog-date">
                                     <i class="fa fa-star gold"></i>
-                                    <bold class="font-weight-bold text-white text-uppercase">{{ r.graid_star }}</bold>
+                                    <bold class="font-weight-bold text-white text-uppercase">{{ t.stars }}</bold>
                                 </div>
                             </div>
                             <div class="bg-white col-md-9">
@@ -39,19 +39,26 @@
                                     <div class="d-flex justify-content-between mb-3">
                                         <small class="m-0">
                                             <i class="fa fa-map-marker-alt text-primary mr-2"></i>
-                                            {{ r.city.city }}</small>
+                                            {{ t.buyscore }} Buy Score</small>
                                         <small class="m-0">
-                                            <i class="fa fa-calendar-alt text-primary mr-2"></i>
-                                            {{ r.buyscore }} Buy Score</small>
-                                        <small class="m-0">
-                                            <i class="fa fa-user text-primary mr-2"></i>{{ r.capacity }}</small>
+                                            <i class="fa fa-user text-primary mr-2"></i>{{ t.capacity }}</small>
                                     </div>
-                                    <a class="h5 text-decoration-none" href="">{{ r.name }}</a>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span class="m-0">
+                                            {{ t.beginning.city.city }}</span>
+                                        <span class="m-0">
+                                            <i class="fa fa-train text-primary mr-2"></i>
+                                            <span class="line"></span>
+                                        </span>
+                                        <span class="m-0">
+                                            {{ t.distination.city.city }}</span>
+                                    </div>
+                                    <a class="h5 text-decoration-none" href="">{{ t.transportCode }}</a>
                                     <div class="border-top mt-4 pt-4">
                                         <div class="d-flex justify-content-between">
                                             <h6 class="m-0"><i class="fa fa-star text-primary mr-2">
-                                                </i>{{ r.userscore }} <small>(250)</small></h6>
-                                            <h6 class="m-0">{{ r.type }} </h6>
+                                                </i>{{ t.userscore }} <small>(250)</small></h6>
+                                            <h6 class="m-0">{{ ttransportCode.type }} </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -104,15 +111,21 @@
                 <!-- Author Bio -->
                 <div class="d-flex flex-column text-center bg-white mb-5 py-5 px-4">
                     <form action="" method="get">
-                        <label for="">City :
-                            {{ filter.form.city }}
-                        </label><hr>
-                        <label for="">Type :
-                            {{ filter.form.type }}
-                        </label><hr>
                         <label for="">Grade(STARS) :
                             {{ filter.form.graid_star }}
                         </label><hr>
+                        <label for="">beginning :
+                            {{ filter.form.beginning }}
+                        </label><hr>
+                        <label for="">distination :
+                            {{ filter.form.distination }}
+                        </label><hr>
+                        <label for="">starttime :
+                            {{ filter.form.starttime }}
+                        </label><hr>
+                        <label for="">type :
+                            {{ filter.form.type }}
+                        </label><hr>  
                         <label for="">Sort by Buy Score :
                             {{ filter.form.buyscore }}
                         </label><hr>

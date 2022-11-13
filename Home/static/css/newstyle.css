@@ -2,3 +2,9 @@
     color:rgb(238, 255, 0) !important;
     text-shadow: 0 0 5px #000;
   }
+
+  span.line{
+    width: 80%;
+    height: 1px;
+    border: 1px solid gray;    
+  }

@@ -132,7 +132,7 @@ def transport(request):
         'Services': 'Services',
         'Menu': 'Menu',
         'counter':counter,
-        'residence':page_obj,
+        'transport':page_obj,
         'page_num':page_num,
         'filter':filter,
     }
