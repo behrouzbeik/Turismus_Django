@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.core.paginator import Paginator
 from .filters import *
@@ -137,3 +137,16 @@ def transport(request):
         'filter':filter,
     }
     return (render(request,'Home/transport.html', context))
+
+
+def servicesLoader(request):
+    if comment_Form.is_valid():
+            data = comment_Form.cleaned_data
+            Commnet.objects.create(comment=data['comment'],rate=data['rate'],user_id=request.user.id,product_id=id)
+        
+    if service == tour :
+        base_url = reverse('package')  # 1 /products/
+        # query_string =  urlencode({'category': category.id})  # 2 category=42
+        url = '{}'.format(base_url)  # 3 /products/?category=42
+    # elif
+    return redirect(url)

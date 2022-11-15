@@ -75,7 +75,16 @@ class Extradition (models.Model):
         return self.exno
 
 
-class Transport (models.Model): 
+class Transport (models.Model):
+    GSTAR=(
+        (1,'1'),
+        (2,'2'),
+        (3,'3'),
+        (4,'4'),
+        (5,'5'),
+        (6,'6'),
+        (7,'7'),
+    ) 
     transportCode = models.CharField ( max_length=15 )
     company = models.ForeignKey ( TransportCo,on_delete=models.CASCADE )
     starttime = models.DateTimeField (  )
@@ -85,7 +94,7 @@ class Transport (models.Model):
     adultprice = models.PositiveIntegerField ( blank=True,null=True )
     childprice = models.PositiveIntegerField ( blank=True,null=True )
     babyprice = models.PositiveIntegerField ( blank=True,null=True )
-    stars = models.PositiveIntegerField ( blank=True,null=True )
+    graid_star=models.PositiveIntegerField(choices=GSTAR, default=0, blank=True,null=True)
     discount = models.fields.PositiveIntegerField ( blank=True,null=True )
     userscore = models.PositiveIntegerField ( blank=True,null=True )
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
@@ -119,7 +128,7 @@ class Residence (models.Model):
     telnum = models.CharField ( max_length=15 )
     logo = models.ImageField ( blank=True,null=True,upload_to='logo' )
     image = models.ImageField ( blank=True,null=True,upload_to=None )
-    graid_star=models.PositiveBigIntegerField(choices=GSTAR, default=0, blank=True,null=True)
+    graid_star=models.PositiveIntegerField(choices=GSTAR, default=0, blank=True,null=True)
     buyscore = models.PositiveIntegerField ( blank=True,null=True )
     userscore = models.PositiveIntegerField ( blank=True,null=True, )
     capacity = models.PositiveBigIntegerField(blank=True,null=True)
