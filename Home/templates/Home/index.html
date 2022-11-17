@@ -252,20 +252,22 @@
                             <h1 class="text-white m-0">Sign Up Now</h1>
                         </div>
                         <div class="card-body rounded-bottom bg-white p-5">
-                            <form>
+                            <form method="post" action="{% url 'Account:register' %}">
+                                {% csrf_token %}
+                                <!-- <div class="form-group">
+                                    <p>{{status}}</p>
+                                </div> -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control p-4" placeholder="Your name" required="required" />
+                                    <input name="cid" type="text" class="form-control p-4" placeholder="Your Personal ID" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control p-4" placeholder="Your email" required="required" />
+                                    <input name="email" type="email" class="form-control p-4" placeholder="Your email" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select px-4" style="height: 47px;">
-                                        <option selected>Select a destination</option>
-                                        <option value="1">destination 1</option>
-                                        <option value="2">destination 1</option>
-                                        <option value="3">destination 1</option>
-                                    </select>
+                                    <input name="pass" type="password" class="form-control p-4" placeholder="PASSWORD" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <input name="repeat" type="password" class="form-control p-4" placeholder="PASSWORD" required="required" />
                                 </div>
                                 <div>
                                     <button class="btn btn-primary btn-block py-3" type="submit">Sign Up Now</button>

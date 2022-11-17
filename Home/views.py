@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import *
 from django.core.paginator import Paginator
 from .filters import *
+from .forms import *
+from . import urls
+from django.shortcuts import redirect, reverse
 
 # Create your views here.
 
@@ -140,13 +143,13 @@ def transport(request):
 
 
 def servicesLoader(request):
-    if comment_Form.is_valid():
-            data = comment_Form.cleaned_data
-            Commnet.objects.create(comment=data['comment'],rate=data['rate'],user_id=request.user.id,product_id=id)
-        
-    if service == tour :
-        base_url = reverse('package')  # 1 /products/
+    data = request.POST
+    if data['service'] == 'tour' :
+        base_url = redirect('package')  # 1 /products/
+        print (base_url)
         # query_string =  urlencode({'category': category.id})  # 2 category=42
-        url = '{}'.format(base_url)  # 3 /products/?category=42
-    # elif
-    return redirect(url)
+        # url = '{}'.format(base_url)  # 3 /products/?category=42
+    # # elif
+    # return redirect(url)
+    return (render(request,'Home/blog.html', {'data':base_url}))
+    

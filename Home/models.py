@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from djmoney.models.fields import MoneyField
+from django.forms import ModelForm
 
 # # IntegerRangeField Definition
 # class IntegerRangeField(models.IntegerField):
@@ -186,5 +187,6 @@ class MyCompanyInfo (models.Model):
     linkedin = models.CharField(max_length=100, default='#')
     insta = models.CharField(max_length=100, default='#')
     utube = models.CharField(max_length=100, default='#')
+
 
 

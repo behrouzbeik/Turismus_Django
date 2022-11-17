@@ -9,10 +9,10 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
-                                    <select class="custom-select px-4" style="height: 47px;">
-                                        <option value="" disabled selected>Destination City</option>
+                                    <select name="destination" class="custom-select px-4" style="height: 47px;" >
+                                        <option value="Destination" disabled selected>Destination City</option>
                                         {% for d in destinations %}
-                                        <option value="1">{{ d.city }}</option>
+                                        <option value="{{ d.city }}">{{ d.city }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -20,21 +20,21 @@
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
                                     <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Depart Date" data-target="#date1" data-toggle="datetimepicker"/>
+                                        <input name="depart" type="date" class="form-control p-4 datetimepicker-input" placeholder="Depart Date"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
                                     <div class="date" id="date2" data-target-input="nearest">
-                                        <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Return Date" data-target="#date2" data-toggle="datetimepicker"/>
+                                        <input name="return" type="date" class="form-control p-4 datetimepicker-input" placeholder="Return Date"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
-                                    <select class="custom-select px-4" style="height: 47px;">
-                                        <option disabled selected>Service</option>
+                                    <select name="service" class="custom-select px-4" style="height: 47px;">
+                                        <option disabled selected value="0">Service</option>
                                         <option value="tour">Tour</option>
                                         <option value="residence">Residence</option>
                                         <option value="plane">Air plane</option>

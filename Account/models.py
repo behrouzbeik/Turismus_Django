@@ -10,13 +10,15 @@ class CustomUser (AbstractUser):
         ('Ma','MASTER'),
         ('Tr','TRAVELER'),
         ('Us','USER'),
+        ('Bl','BLOGER'),
+        ('Gu', 'GUIDE'),
     )
-    mobile  = models.CharField ( max_length=15 )
+    mobile  = models.CharField ( max_length=15, default='0' )
     email = models.EmailField(unique=True)
-    usertype = models.CharField ( max_length=2,choices=USERTYPE )
+    usertype = models.CharField ( max_length=2, choices=USERTYPE, default='Us' )
     firstname  = models.CharField ( blank=True,null=True,max_length=50 )
     lastname  = models.CharField ( blank=True,null=True,max_length=50 )
-    unicid  = models.CharField ( max_length=10 )
+    unicid  = models.CharField ( max_length=10, unique=True )
     birthday  = models.DateTimeField ( blank=True,null=True )
     gender  = models.BooleanField ( blank=True,null=True )
     status = models.BooleanField(default=False)
