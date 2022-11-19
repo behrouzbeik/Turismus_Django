@@ -62,6 +62,11 @@
                             </div>
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'Account:logout' %}" class="nav-item nav-link active">Logout</a>
+                    {% else %}
+                    <a href="{% url 'Home:index' %}#login" class="nav-item nav-link active">Login</a>
+                    {% endif %}
                     </div>
                 </div>
             </nav>
