@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from Home.models import *
 from django.contrib.auth.models import UserManager
 
 # Create your models here.
 
-class CustomUser (AbstractUser):
+class CustomUser (AbstractUser, PermissionsMixin):
     USERTYPE=(
         ('Ma','MASTER'),
         ('Tr','TRAVELER'),
@@ -22,6 +22,10 @@ class CustomUser (AbstractUser):
     birthday  = models.DateTimeField ( blank=True,null=True )
     gender  = models.BooleanField ( blank=True,null=True )
     status = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email

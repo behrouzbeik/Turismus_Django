@@ -92,12 +92,12 @@ def user_login(request):
     # if form.is_valid():
         # data = form.cleaned_data
         # remember = data['remember']
-            
-        try:
-            user = authenticate (request,username=CustomUser.objects.get(email=data['email']),password=data['pass'])
-            login(request,user)
-        except:
-            user = authenticate(request,email=data['email'],password=data['pass'])
+        user = authenticate(request, email=data['email'], password=data['pass'])
+        if user is not None:
+            print("user is authenticated")    
+            login(request, user)
+        else:
+            print("user is not authenticated")
         # if user is not None:
             
             # if not remember:
