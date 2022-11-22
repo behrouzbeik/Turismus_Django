@@ -39,7 +39,7 @@ class TransportFilter(django_filters.FilterSet):
     distination__city = django_filters.ModelChoiceFilter(queryset=City.objects.all())
     company = django_filters.ModelMultipleChoiceFilter(queryset=TransportCo.objects.all(),widget = forms.CheckboxSelectMultiple)
     starttime__date = django_filters.DateTimeFilter(lookup_expr='exact', widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
-    type = django_filters.MultipleChoiceFilter(choices=Terminal.TRANSPORTTYPE, widget = forms.CheckboxSelectMultiple, field_name='type',lookup_expr='exact')
+    beginning__type = django_filters.MultipleChoiceFilter (choices=Terminal.TRANSPORTTYPE, widget = forms.CheckboxSelectMultiple, field_name='beginning__type',lookup_expr='exact')
     buyscore = django_filters.ChoiceFilter(choices = _SCORE, method='buyscore_filter')
     userscore = django_filters.ChoiceFilter(choices = _SCORE, method='userscore_filter')
     

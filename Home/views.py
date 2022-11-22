@@ -144,12 +144,42 @@ def transport(request):
 
 def servicesLoader(request):
     data = request.POST
-    if data['service'] == 'tour' :
-        base_url = redirect('package')  # 1 /products/
-        print (base_url)
+    
+    if data['beginning'] == 'NULL':
+        beginning = ''
+    else:
+        beginning = str(City.objects.get(city=data['beginning']).id)
+
+    if data['destination'] == 'NULL':
+        destination = ''
+    else:
+        destination = str(City.objects.get(city=data['destination']).id)
+    
+    date = data['depart']
+    if data['service'] == 'residence' :
+        base_url = redirect('Home:residence')
+        url = base_url.url + '?city='+destination+'&buyscore=&userscore='
+    elif data['service'] == 'plane' :
+        base_url = redirect('Home:transport')
+        url = base_url.url + '?beginning__city='+beginning+'&distination__city='+destination+'&starttime__date='+str(date)+'&beginning__type=Pl'+'&buyscore=&userscore='
+    elif data['service'] == 'train' :
+        base_url = redirect('Home:transport')
+        url = base_url.url + '?beginning__city='+beginning+'&distination__city='+destination+'&starttime__date='+str(date)+'&beginning__type=Tr'+'&buyscore=&userscore='
+    elif data['service'] == 'bus' :
+        base_url = redirect('Home:transport')
+        url = base_url.url + '?beginning__city='+beginning+'&distination__city='+destination+'&starttime__date='+str(date)+'&beginning__type=Bu'+'&buyscore=&userscore='
+    elif data['service'] == 'cruise' :
+        base_url = redirect('Home:transport')
+        url = base_url.url + '?beginning__city='+beginning+'&distination__city='+destination+'&starttime__date='+str(date)+'&beginning__type=Cr'+'&buyscore=&userscore='
+    else :
+        pass
+        # graid_star=&beginning__city=1&distination__city=3&starttime__date=beginning__type=Tr&buyscore=&userscore=
+        # beginning__city=1&distination__city=3&starttime__date=&beginning__type=Tr&buyscore=&userscore=
+        # ?graid_star=2&beginning__city=&distination__city=&starttime__date=&buyscore=&userscore=
+        # print ('INJA', base_url)
         # query_string =  urlencode({'category': category.id})  # 2 category=42
         # url = '{}'.format(base_url)  # 3 /products/?category=42
     # # elif
-    # return redirect(url)
-    return (render(request,'Home/blog.html', {'data':base_url}))
+    return (redirect(url))
+    # return (render(request,'Home/blog.html', {'data':base_url}))
     
