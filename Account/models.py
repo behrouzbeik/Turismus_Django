@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser,AbstractUser, BaseUserManager, PermissionsMixin
 from Home.models import *
 from django.contrib.auth.models import UserManager
 
 # Create your models here.
 
-class CustomUser (AbstractUser, PermissionsMixin):
+class CustomUser (AbstractBaseUser, PermissionsMixin):
     USERTYPE=(
         ('Ma','MASTER'),
         ('Tr','TRAVELER'),
@@ -13,11 +13,14 @@ class CustomUser (AbstractUser, PermissionsMixin):
         ('Bl','BLOGER'),
         ('Gu', 'GUIDE'),
     )
+    username = models.CharField ( max_length=100, blank=True,null=True )
     mobile  = models.CharField ( max_length=15, default='0' )
     email = models.EmailField(unique=True)
     usertype = models.CharField ( max_length=2, choices=USERTYPE, default='Us' )
     firstname  = models.CharField ( blank=True,null=True,max_length=50 )
     lastname  = models.CharField ( blank=True,null=True,max_length=50 )
+    first_name  = models.CharField ( blank=True,null=True,max_length=50 )
+    last_name  = models.CharField ( blank=True,null=True,max_length=50 )
     unicid  = models.CharField ( max_length=10, unique=True )
     birthday  = models.DateTimeField ( blank=True,null=True )
     gender  = models.BooleanField ( blank=True,null=True )
@@ -26,10 +29,16 @@ class CustomUser (AbstractUser, PermissionsMixin):
     city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True,null=True)
     profesional = models.CharField ( max_length=50, blank=True, null=True )
     is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(blank=True, null=True)
+
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    objects = UserManager()
 
     def __str__(self):
         return self.email
