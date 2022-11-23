@@ -235,10 +235,11 @@
                     <h1>Our Travel Guides</h1>
                 </div>
                 <div class="row">
+                    {% for g in Guides %}
                     <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
                         <div class="team-item bg-white mb-4">
                             <div class="team-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="{% static 'img/team-1.jpg' %}" alt="">
+                                <img class="img-fluid w-100" src="{{ g.image.url }}" alt="{{ g.email }}">
                                 <div class="team-social">
                                     <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
                                     <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
@@ -247,62 +248,13 @@
                                 </div>
                             </div>
                             <div class="text-center py-4">
-                                <h5 class="text-truncate">Guide Name</h5>
-                                <p class="m-0">Designation</p>
+                                <h5 class="text-truncate">{{ g.email }}</h5>
+                                <p class="m-0">{{ g.city.city }}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
-                        <div class="team-item bg-white mb-4">
-                            <div class="team-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="{% static 'img/team-2.jpg' %}" alt="">
-                                <div class="team-social">
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <h5 class="text-truncate">Guide Name</h5>
-                                <p class="m-0">Designation</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
-                        <div class="team-item bg-white mb-4">
-                            <div class="team-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="{% static 'img/team-3.jpg' %}" alt="">
-                                <div class="team-social">
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <h5 class="text-truncate">Guide Name</h5>
-                                <p class="m-0">Designation</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
-                        <div class="team-item bg-white mb-4">
-                            <div class="team-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="{% static 'img/team-4.jpg' %}" alt="">
-                                <div class="team-social">
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
-                                    <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <h5 class="text-truncate">Guide Name</h5>
-                                <p class="m-0">Designation</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+                    
                 </div>
             </div>
         </div>
@@ -317,42 +269,17 @@
                     <h1>What Say Our Clients</h1>
                 </div>
                 <div class="owl-carousel testimonial-carousel">
+                    {% for u in users %}
                     <div class="text-center pb-4">
-                        <img class="img-fluid mx-auto" src="{% static 'img/testimonial-1.jpg' %}" style="width: 100px; height: 100px;" >
+                        <img class="img-fluid mx-auto" src="{{ u.image.url }}" alt="{{ u.email }}" style="width: 100px; height: 100px;" >
                         <div class="testimonial-text bg-white p-4 mt-n5">
                             <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
                             </p>
-                            <h5 class="text-truncate">Client Name</h5>
-                            <span>Profession</span>
+                            <h5 class="text-truncate">{{ u.email }}</h5>
+                            <span>{{ u.profesional }}</span>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <img class="img-fluid mx-auto" src="{% static 'img/testimonial-2.jpg' %}" style="width: 100px; height: 100px;" >
-                        <div class="testimonial-text bg-white p-4 mt-n5">
-                            <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
-                            </p>
-                            <h5 class="text-truncate">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <img class="img-fluid mx-auto" src="{% static 'img/testimonial-3.jpg' %}" style="width: 100px; height: 100px;" >
-                        <div class="testimonial-text bg-white p-4 mt-n5">
-                            <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
-                            </p>
-                            <h5 class="text-truncate">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <img class="img-fluid mx-auto" src="{% static 'img/testimonial-4.jpg' %}" style="width: 100px; height: 100px;" >
-                        <div class="testimonial-text bg-white p-4 mt-n5">
-                            <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
-                            </p>
-                            <h5 class="text-truncate">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

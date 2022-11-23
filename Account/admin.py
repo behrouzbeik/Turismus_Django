@@ -11,9 +11,10 @@ class CustomeUserAdmin(UserAdmin):
     model = CustomUser
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
-    list_display = ('email', 'mobile', 'email', 'usertype', 
+    list_display = ('email', 'mobile', 'image', 'usertype', 
                     'firstname', 'lastname', 'unicid',
-                    'birthday', 'gender', 'status',)
+                    'birthday', 'gender', 'status', 'city')
+    list_editable = ('usertype','image', 'city')
 
 
 class WaletAdmin(admin.ModelAdmin):

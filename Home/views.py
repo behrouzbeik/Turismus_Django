@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from Account.models import CustomUser
 from django.core.paginator import Paginator
 from .filters import *
 from .forms import *
@@ -11,6 +12,9 @@ from django.shortcuts import redirect, reverse
 def index(request):
     # myCompanyInfo = MyCompanyInfo.objects.get(company_name='Behrouz Travel')
     cities = City.objects.filter(home_page_display=True).order_by('-id')[:6]
+    Guides = CustomUser.objects.filter(usertype='Gu').order_by('-id')
+    users = CustomUser.objects.filter(usertype='Us').order_by('-id')
+    print('INJA:', users)
     destinations = City.objects.all()
     tour = Tour.objects.filter(home_page_display=True).order_by('-id')[:6]
     context = {
@@ -31,6 +35,8 @@ def index(request):
         'Menu': 'Menu',
         'cities':cities,
         'tour':tour,
+        'Guides':Guides,
+        'users' : users,
     }
     return (render(request,'Home/index.html', context))
 

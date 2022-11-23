@@ -22,6 +22,9 @@ class CustomUser (AbstractUser, PermissionsMixin):
     birthday  = models.DateTimeField ( blank=True,null=True )
     gender  = models.BooleanField ( blank=True,null=True )
     status = models.BooleanField(default=False)
+    image = models.ImageField ( blank=True,null=True,upload_to='Profile' )
+    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True,null=True)
+    profesional = models.CharField ( max_length=50, blank=True, null=True )
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
