@@ -10,11 +10,11 @@ from django.shortcuts import redirect, reverse
 # Create your views here.
 
 def index(request):
+    
     # myCompanyInfo = MyCompanyInfo.objects.get(company_name='Behrouz Travel')
     cities = City.objects.filter(home_page_display=True).order_by('-id')[:6]
     Guides = CustomUser.objects.filter(usertype='Gu').order_by('-id')
     users = CustomUser.objects.filter(usertype='Us').order_by('-id')
-    print('INJA:', users)
     destinations = City.objects.all()
     tour = Tour.objects.filter(home_page_display=True).order_by('-id')[:6]
     context = {
