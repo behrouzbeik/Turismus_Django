@@ -12,19 +12,19 @@
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
-                        <a class="text-primary px-3" href="">
+                        <a class="text-primary px-3" href="https://www.linkedin.com/in/behrouz-beik-khorasani-70b694134/" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a class="text-primary px-3" href="">
+                        <a class="text-primary px-3" href="https://www.linkedin.com/in/behrouz-beik-khorasani-70b694134/" target="_blank">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a class="text-primary px-3" href="https://www.linkedin.com/in/behrouz-beik-khorasani-70b694134/">
+                        <a class="text-primary px-3" href="https://www.linkedin.com/in/behrouz-beik-khorasani-70b694134/" target="_blank">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a class="text-primary px-3" href="">
+                        <a class="text-primary px-3" href="https://www.linkedin.com/in/behrouz-beik-khorasani-70b694134/" target="_blank">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a class="text-primary pl-3" href="">
+                        <a class="text-primary pl-3" href="https://www.linkedin.com/in/behrouz-beik-khorasani-70b694134/" target="_blank">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </div>
@@ -48,20 +48,20 @@
                         <a href="{% url 'Home:index' %}" class="nav-item nav-link active">Home</a>
                         <a href="{% url 'Home:about' %}" class="nav-item nav-link">About</a>
                         <a href="{% url 'Home:services' %}" class="nav-item nav-link">Services</a>
-                        <a href="blog.html" class="nav-item nav-link">Blog</a>
+                        <a href="{% url 'Home:index' %}#blog" class="nav-item nav-link">Blog</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pakages</a>
                             <div class="dropdown-menu border-0 rounded-0 m-0">
                                 <a href="{% url 'Home:package' %}" class="dropdown-item">Tour Packages</a>
                                 <a href="{% url 'Home:residence' %}" class="dropdown-item">Hotel and Residence</a>
                                 <a href="{% url 'Home:transport' %}" class="dropdown-item">Transport</a>
-                                <a href="single.html" class="dropdown-item">Blog Detail</a>
-                                <a href="destination.html" class="dropdown-item">Destination</a>
-                                <a href="guide.html" class="dropdown-item">Travel Guides</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="{% url 'Home:about' %}" class="dropdown-item">Blog Detail</a>
+                                <a href="{% url 'Home:index' %}#dest" class="dropdown-item">Destination</a>
+                                <a href="{% url 'Home:index' %}#guides" class="dropdown-item">Travel Guides</a>
+                                <a href="{% url 'Home:index' %}#testim" class="dropdown-item">Testimonial</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'Home:about' %}" class="nav-item nav-link">Contact</a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'Account:logout' %}" class="nav-item nav-link active">Logout</a>
                     {% else %}
