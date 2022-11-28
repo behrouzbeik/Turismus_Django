@@ -1,11 +1,16 @@
 from django.db import models
-from Account import CustomUser
+from Account.models import CustomUser
 
 # Create your models here.
 class Frame(models.Model):
+    frameName = models.CharField(max_length=20)
     numberOfPart = models.PositiveIntegerField()
     numberOfImage = models.PositiveIntegerField()
     htmlFileName = models.CharField(max_length=20)
+    image = models.ImageField(upload_to='Frame', blank=True, null=True)
+
+    def __str__(self):
+        return self.frameName
 
 
 class Article(models.Model):
@@ -31,11 +36,34 @@ class ArticlePart(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     partOrder = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.partTitle
+
 
 class ArticleImg(models.Model):
-    image = models.ImageField()
+    title = models.CharField(max_length=15, default="0")
+    image = models.ImageField(upload_to='Frame')
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     imgOrder = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.title
 
+
+class ArticleLink(models.Model):
+    title = models.CharField(max_length=50, default="0")
+    link = models.CharField(max_length=150)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    linkOrder = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.title
+
+
+class SpecialPosition(models.Model):
+    title = models.CharField(max_length=20)
+    article = models.ForeignKey(Article,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
 
