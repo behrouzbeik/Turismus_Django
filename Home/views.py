@@ -10,22 +10,24 @@ from django.shortcuts import redirect, reverse
 
 # Create your views here.
 class MyArticle:
-    def __init__(self, article):
-        self.parts = ArticlePart.objects.filter(article_id=article.id).order_by('partOrder')
-        self.images = ArticleImg.objects.filter(article_id=article.id).order_by('imgOrder')
-        self.links = ArticleLink.objects.filter(article_id=article.id).order_by('linkOrder')
-        self.title = article.article.title
-        self.frame = article.article.frame
-        self.create = article.article.create
-        self.update = article.article.update
-        self.author = article.article.author
-        self.status = article.article.status
+    def __init__(self, selectarticle):
+        self.parts = ArticlePart.objects.filter(article_id=selectarticle.id).order_by('partOrder')
+        print('selectarticle.id', self.parts[0].partTitle)
+        self.images = ArticleImg.objects.filter(article_id=selectarticle.id).order_by('imgOrder')
+        self.links = ArticleLink.objects.filter(article_id=selectarticle.id).order_by('linkOrder')
+        self.title = selectarticle.title
+        self.frame = selectarticle.frame.htmlFileName
+        # print('page', self.frame.htmlFileName)
+        self.create = selectarticle.create
+        self.update = selectarticle.update
+        self.author = selectarticle.author
+        self.status = selectarticle.status
 
 def index(request):
     
     # myCompanyInfo = MyCompanyInfo.objects.get(company_name='Behrouz Travel')
-    homePageArticle = MyArticle(SpecialPosition.objects.get(title='Homepage'))
-    homePageArticle.images
+    selectedArticle = SpecialPosition.objects.get(title='Homepage')
+    homePageArticle = MyArticle(Article.objects.get(id=selectedArticle.article.id))
     cities = City.objects.filter(home_page_display=True).order_by('-id')[:6]
     Guides = CustomUser.objects.filter(usertype='Gu').order_by('-id')
     users = CustomUser.objects.filter(usertype='Us').order_by('-id')
@@ -40,7 +42,6 @@ def index(request):
         # 'linkedin': myCompanyInfo.linkedin,
         # 'insta': myCompanyInfo.insta,
         # 'utube': myCompanyInfo.utube,
-        'articleimg' : homePageArticle.images[0],
         'destinations': destinations,
         'SignIn': 'Sign In',
         'SignOut': 'SignOut',
@@ -52,7 +53,7 @@ def index(request):
         'tour':tour,
         'Guides':Guides,
         'users' : users,
-        'homePageArticle' : homePageArticle,
+        'myarticle' : homePageArticle,
     }
     return (render(request,'Home/index.html', context))
 

@@ -4,23 +4,23 @@
         <div class="row">
             <div class="col-lg-6" style="min-height: 500px;">
                 <div class="position-relative h-100">
-                    <img class="position-absolute w-100 h-100" src="{{ homePageArticle.images.0.image.url }}" alt="{{ homePageArticle.title }}" style="object-fit: cover;">
+                    <img class="position-absolute w-100 h-100" src="{{ myarticle.images.0.image.url }}" alt="{{ myarticle.title }}" style="object-fit: cover;">
                 </div>
             </div>
             <div class="col-lg-6 pt-5 pb-lg-5">
                 <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
-                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">{{ homePageArticle.title }}</h6>
-                    <h1 class="mb-3">{{ homePageArticle.parts.0.partTitle }}</h1>
-                    <p>{{ homePageArticle.parts.0.text }}</p>
+                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">{{ myarticle.title }}</h6>
+                    <h1 class="mb-3">{{ myarticle.parts.0.partTitle }}</h1>
+                    <p>{{ myarticle.parts.0.text }}</p>
                     <div class="row mb-4">
                         <div class="col-6">
-                            <img class="img-fluid" src="{{ homePageArticle.images.1.image.url }}" alt="{{ homePageArticle.images.1.title }}">
+                            <img class="img-fluid" src="{{ myarticle.images.1.image.url }}" alt="{{ myarticle.images.1.title }}">
                         </div>
                         <div class="col-6">
-                            <img class="img-fluid" src="{{ homePageArticle.images.2.image.url }}" alt="{ homePageArticle.images.2.title }}">
+                            <img class="img-fluid" src="{{ myarticle.images.2.image.url }}" alt="{ myarticle.images.2.title }}">
                         </div>
                     </div>
-                    <a href="{{ homePageArticle.links.0.link }}" class="btn btn-primary mt-1">{{ homePageArticle.links.0.title }}</a>
+                    <a href="{{ myarticle.links.0.link }}" class="btn btn-primary mt-1">{{ myarticle.links.0.title }}</a>
                 </div>
             </div>
         </div>
