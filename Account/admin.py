@@ -7,7 +7,7 @@ from .models import *
 # Register your models here.
 
 # @admin.register(CustomUser)
-class CustomeUserAdmin(UserAdmin):
+class CustomeUserAdmin(admin.ModelAdmin):
     model = CustomUser
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm

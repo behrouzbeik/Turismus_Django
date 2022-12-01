@@ -1,8 +1,8 @@
 
 {% load static %}
 <!-- Blog Start -->
-<div class="container-fluid py-5">
-    <div class="container py-5">
+<!-- <div class="container-fluid py-5"> -->
+    <!-- <div class="container py-5"> -->
         <div class="row">
             <div class="col-lg-12">
                 <!-- Blog Detail Start -->
@@ -12,22 +12,22 @@
                             <img class="img-fluid w-100" src="{{ myarticle.images.0.image.url }}" alt="{{ myarticle.images.0.title }}">
                             <div class="blog-date">
                                 <h6 class="font-weight-bold mb-n1">{{ myarticle.create.date.day }}</h6>
-                                <small class="text-white text-uppercase">{{ myarticle.create.date.strftime }}</small>
+                                <small class="text-white text-uppercase">{{ myarticle.month }}</small>
                             </div>
                         </div>
                     </div>
                     <div class="bg-white mb-3" style="padding: 30px;">
                         <div class="d-flex mb-3">
-                            <a class="text-primary text-uppercase text-decoration-none" href="">{{ myarticle.author.name }}</a>
+                            <a class="text-primary text-uppercase text-decoration-none" href="">{{ myarticle.author.firstname }}</a>
                             <span class="text-primary px-2">|</span>
-                            <a class="text-primary text-uppercase text-decoration-none" href="">{{ myarticle.authore.type }}</a>
+                            <a class="text-primary text-uppercase text-decoration-none" href="">{{ myarticle.author.usertype }}</a>
                         </div>
-                        <h2 class="mb-3">{{ myarticle.parts.0.title }}</h2>
+                        <h2 class="mb-3">{{ myarticle.parts.0.partTitle }}</h2>
                         <p>{{ myarticle.parts.0.text }}</p>
-                        <h4 class="mb-3">{{ myarticle.parts.1.title }}</h4>
+                        <h4 class="mb-3">{{ myarticle.parts.1.partTitle }}</h4>
                         <img class="img-fluid w-50 float-left mr-4 mb-2" src="{{ myarticle.images.1.image.url }}" alt="{{ myarticle.images.1.title }}">
                         <p>{{ myarticle.parts.1.text }}</p>
-                        <h5 class="mb-3">{{ myarticle.parts.2.title }}</h5>
+                        <h5 class="mb-3">{{ myarticle.parts.2.partTitle }}</h5>
                         <img class="img-fluid w-50 float-right ml-4 mb-2" src="{{ myarticle.images.2.image.url }}" alt="{{ myarticle.images.2.title }}">
                         <p>{{ myarticle.parts.2.text }}</p>
                     </div>
@@ -40,6 +40,6 @@
 
             
         </div>
-    </div>
-</div>
+    <!-- </div> -->
+<!-- </div> -->
 <!-- Blog End -->

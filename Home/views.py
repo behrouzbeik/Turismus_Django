@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render
 from .models import *
 from Account.models import CustomUser
@@ -12,13 +13,14 @@ from django.shortcuts import redirect, reverse
 class MyArticle:
     def __init__(self, selectarticle):
         self.parts = ArticlePart.objects.filter(article_id=selectarticle.id).order_by('partOrder')
-        print('selectarticle.id', self.parts[0].partTitle)
+        # print('selectarticle.id', self.parts[0].partTitle)
         self.images = ArticleImg.objects.filter(article_id=selectarticle.id).order_by('imgOrder')
         self.links = ArticleLink.objects.filter(article_id=selectarticle.id).order_by('linkOrder')
         self.title = selectarticle.title
         self.frame = selectarticle.frame.htmlFileName
         # print('page', self.frame.htmlFileName)
         self.create = selectarticle.create
+        self.month = (datetime.datetime.strptime(str(self.create.month), "%m")).strftime("%b")
         self.update = selectarticle.update
         self.author = selectarticle.author
         self.status = selectarticle.status
