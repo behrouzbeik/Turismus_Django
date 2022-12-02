@@ -1,0 +1,41 @@
+{% load static %}
+    <!-- Blog Start -->
+            <div class="row bg-white my-5">
+                <div class="col-lg-7">
+                    <div class="blog-item">
+                        <div class="position-relative">
+                            <div class="blog-date">
+                                <h6 class="font-weight-bold mb-n1">{{ myarticle.create.date.day }}</h6>
+                                <small class="text-white text-uppercase">{{ myarticle.month }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white m-4" style="padding: 30px;">
+                        <div class="d-flex mb-3">
+                            <a class="text-primary text-uppercase text-decoration-none" href="">{{ myarticle.author.firstname }}</a>
+                            <span class="text-primary px-2">|</span>
+                            <a class="text-primary text-uppercase text-decoration-none" href="">{{ myarticle.author.usertype }}</a>
+                        </div>
+                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">{{ myarticle.title }}</h6>
+                        <h1 class="mb-3">{{ myarticle.parts.0.partTitle }}</h1>
+                        <p>{{ myarticle.parts.0.text }}</p>
+
+                        <h6 class="mb-3">{{ myarticle.parts.1.text }}</h6>
+                        <a href="{{ myarticle.links.0.link }}" class="btn btn-primary mt-1">{{ myarticle.links.0.title }}</a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <img class="blogdetailimg" src="{{ myarticle.images.0.image.url }}" alt="{{ myarticle.images.0.title }}">
+                </div>
+                <div class="col-lg-5">
+                    <img class="blogdetailimg" src="{{ myarticle.images.1.image.url }}" alt="{{ myarticle.images.1.title }}">
+                </div>
+                <div class="col-lg-7">
+                    <div class="bg-white mb-3" style="padding: 30px;">
+                        <h3 class="mb-3">{{ myarticle.parts.2.partTitle }}</h3>
+                        <p>{{ myarticle.parts.2.text }}</p>
+                        <a href="{{ myarticle.links.1.link }}" class="btn btn-primary mt-1">{{ myarticle.links.1.title }}</a>
+                    </div>
+                </div>
+            </div>
+    <!-- Blog End -->

@@ -13,3 +13,10 @@
   height: 300px !important;
   object-fit: cover;
 }
+
+.blogdetailimg{
+    height: 100vh;
+    max-width: 100%;
+    margin: 10px 0;
+    object-fit: cover;
+}
