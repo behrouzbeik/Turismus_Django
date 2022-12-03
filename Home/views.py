@@ -26,7 +26,24 @@ class MyArticle:
         self.status = selectarticle.status
 
 def index(request):
-    
+    class MyArticles:
+        def __init__(self, selectarticle):
+            self.id = selectarticle.id
+            self.img = ArticleImg.objects.get(article_id=selectarticle.id, imgOrder=1)
+            self.part = ArticlePart.objects.get(article_id=selectarticle.id, partOrder=1)
+            self.title = selectarticle.title
+            self.create = selectarticle.create
+            self.month = (datetime.datetime.strptime(str(self.create.month), "%m")).strftime("%b")
+            self.update = selectarticle.update
+            self.author = selectarticle.author
+            self.status = selectarticle.status
+    newestArticles = Article.objects.all().order_by('-update')[:3]
+    articles = []
+    for a in newestArticles:
+        if a.status == 'pub':
+            articles.append(MyArticles(a))
+
+
     # myCompanyInfo = MyCompanyInfo.objects.get(company_name='Behrouz Travel')
     selectedArticle = SpecialPosition.objects.get(title='Homepage')
     homePageArticle = MyArticle(Article.objects.get(id=selectedArticle.article.id))
@@ -56,6 +73,7 @@ def index(request):
         'Guides':Guides,
         'users' : users,
         'myarticle' : homePageArticle,
+        'articles':articles,
     }
     return (render(request,'Home/index.html', context))
 

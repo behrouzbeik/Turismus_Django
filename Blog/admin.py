@@ -9,10 +9,6 @@ class FrameAdmin(admin.ModelAdmin):
     list_editable = ('numberOfPart', 'numberOfImage', 'htmlFileName')
 
 
-class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'frame', 'create', 'update', 'author', 'status']
-    # inlines = [city,image]
-    list_editable = ('status',)
 
 
 class ArticlePartAdmin(admin.ModelAdmin):
@@ -37,6 +33,28 @@ class SpecialPositinAdmin(admin.ModelAdmin):
     list_display = ['title', 'article']
     # inlines = [city,image]
     list_editable = ('article',)
+
+
+class ArticlePartInlines(admin.TabularInline):
+    model = ArticlePart
+    extra = 1
+
+
+class ArticleLinkInlines(admin.TabularInline):
+    model = ArticleLink
+    extra = 1
+
+
+class ArticleImgInlines(admin.TabularInline):
+    model = ArticleImg
+    extra = 1
+
+
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['title', 'frame', 'create', 'update', 'author', 'status']
+    inlines = [ArticlePartInlines,ArticleLinkInlines,ArticleImgInlines]
+    list_editable = ('status',)
+
 
 
 admin.site.register(Frame, FrameAdmin)

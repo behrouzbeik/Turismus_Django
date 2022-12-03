@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,AbstractUser, BaseUserManager, PermissionsMixin
-from Home.models import *
+# from Home.models import Tour
 from django.contrib.auth.models import UserManager
 
 # Create your models here.
@@ -26,7 +26,7 @@ class CustomUser (AbstractBaseUser, PermissionsMixin):
     gender  = models.BooleanField ( blank=True,null=True )
     status = models.BooleanField(default=False)
     image = models.ImageField ( blank=True,null=True,upload_to='Profile' )
-    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True,null=True)
+    city = models.ForeignKey(to='Home.City', on_delete=models.CASCADE, blank=True,null=True)
     profesional = models.CharField ( max_length=50, blank=True, null=True )
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -82,11 +82,11 @@ class Bank_deposit (models.Model):
 
 
 class Userscore (models.Model):
-    tour  = models.ManyToManyField ( Tour,blank=True,null=True,related_name='tour_scr' )
-    transportcompany  = models.ManyToManyField ( TransportCo,blank=True,null=True,related_name='transportco_scr' )
-    transport  = models.ManyToManyField ( Transport,blank=True,null=True,related_name='transport_scr' )
-    residence  = models.ManyToManyField ( Residence,blank=True,null=True,related_name='residence_scr' )
-    room  = models.ManyToManyField ( Room,blank=True,null=True,related_name='room_scr' )
+    tour  = models.ManyToManyField ( to='Home.Tour',blank=True,null=True,related_name='tour_scr' )
+    transportcompany  = models.ManyToManyField ( to='Home.TransportCo',blank=True,null=True,related_name='transportco_scr' )
+    transport  = models.ManyToManyField ( to='Home.Transport',blank=True,null=True,related_name='transport_scr' )
+    residence  = models.ManyToManyField ( to='Home.Residence',blank=True,null=True,related_name='residence_scr' )
+    room  = models.ManyToManyField ( to='Home.Room',blank=True,null=True,related_name='room_scr' )
     rate  = models.PositiveIntegerField (  )
     description  = models.TextField (  )
     user  = models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
