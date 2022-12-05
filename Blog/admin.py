@@ -56,6 +56,11 @@ class ArticleAdmin(admin.ModelAdmin):
     list_editable = ('status',)
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['article', 'author', 'body', 'stars', 'active']
+    list_editable = ('active',)
+
+
 
 admin.site.register(Frame, FrameAdmin)
 admin.site.register(Article, ArticleAdmin)
@@ -63,3 +68,4 @@ admin.site.register(ArticlePart, ArticlePartAdmin)
 admin.site.register(ArticleImg, ArticleImgAdmin)
 admin.site.register(ArticleLink, ArticleLinkAdmin)
 admin.site.register(SpecialPosition, SpecialPositinAdmin)
+admin.site.register(Comment, CommentAdmin)

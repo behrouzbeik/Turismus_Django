@@ -1,5 +1,5 @@
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Home.models import *
 from .models import *
 from django.core.paginator import Paginator
@@ -58,6 +58,7 @@ def blogdetail(request, articleid):
 
     class MyArticle:
         def __init__(self, selectarticle):
+            self.id = selectarticle.id
             self.parts = ArticlePart.objects.filter(article_id=selectarticle.id).order_by('partOrder')
             # print('selectarticle.id', self.parts[0].partTitle)
             self.images = ArticleImg.objects.filter(article_id=selectarticle.id).order_by('imgOrder')
@@ -70,14 +71,19 @@ def blogdetail(request, articleid):
             self.update = selectarticle.update
             self.author = selectarticle.author
             self.status = selectarticle.status
-
     # selectedArticle = SpecialPosition.objects.get(title='Homepage')
     myarticle = MyArticle(Article.objects.get(id=articleid))
-
+    comments = Comment.objects.filter(article_id=articleid, active=True)
     context = {
         'counter':counter,
         'myarticle' : myarticle,
+        'comments':comments,
     }
-
     return (render(request,'Blog/blogdetail.html',context))
 
+
+def comment_create(request, articleid):
+    url = request.META.get('HTTP_REFERER')
+    comment = Comment(article=Article.objects.get(id=articleid), author=CustomUser.objects.get(id=request.user.id), body=request.POST['message'], stars=request.POST['rate'], active=False)
+    comment.save()
+    return redirect(url)

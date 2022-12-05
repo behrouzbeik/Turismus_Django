@@ -67,3 +67,20 @@ class SpecialPosition(models.Model):
     def __str__(self):
         return self.title
 
+
+class Comment(models.Model):
+    PRODUCT_STARS = [
+        ('1' , 'Very Bad'),
+        ('2', 'Bad'),
+        ('3', 'Normal'),
+        ('4', 'Good'),
+        ('5', 'Perfect'),
+    ]
+    article = models.ForeignKey(Article,on_delete=models.CASCADE,related_name='comments',)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='comments', )
+    body = models.TextField()
+    stars = models.CharField(max_length=10,choices=PRODUCT_STARS)
+    datetime_create = models.DateTimeField(auto_now_add=True)
+    datetime_update = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+

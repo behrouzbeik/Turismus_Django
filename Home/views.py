@@ -52,6 +52,7 @@ def index(request):
     users = CustomUser.objects.filter(usertype='Us').order_by('-id')
     destinations = City.objects.all()
     tour = Tour.objects.filter(home_page_display=True).order_by('-id')[:6]
+    comments = Comment.objects.filter(active=True).order_by('-id')[:6]
     context = {
         # 'title': myCompanyInfo.company_name,
         # 'email': myCompanyInfo.email,
@@ -74,6 +75,7 @@ def index(request):
         'users' : users,
         'myarticle' : homePageArticle,
         'articles':articles,
+        'comments':comments,
     }
     return (render(request,'Home/index.html', context))
 

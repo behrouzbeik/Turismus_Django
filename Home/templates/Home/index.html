@@ -217,7 +217,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
                         <div class="team-item bg-white mb-4">
                             <div class="team-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="{{ g.image.url }}" alt="{{ g.email }}">
+                                <img class="img-fluid w-100" src="{{ g.image.url }}" alt="{{ g.firstname }}">
                                 <div class="team-social">
                                     <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
                                     <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
@@ -226,7 +226,7 @@
                                 </div>
                             </div>
                             <div class="text-center py-4">
-                                <h5 class="text-truncate">{{ g.email }}</h5>
+                                <h5 class="text-truncate">{{ g.firstname }}</h5>
                                 <p class="m-0">{{ g.city.city }}</p>
                             </div>
                         </div>
@@ -247,14 +247,15 @@
                     <h1>What Say Our Clients</h1>
                 </div>
                 <div class="owl-carousel testimonial-carousel">
-                    {% for u in users %}
+                    {% for c in comments %}
                     <div class="text-center pb-4">
-                        <img class="img-fluid mx-auto" src="{{ u.image.url }}" alt="{{ u.email }}" style="width: 100px; height: 100px;" >
+                        {% if c.author.image %}
+                        <img class="img-fluid mx-auto" src="{{ c.author.image.url }}" alt="{{ c.author.firstname }}" style="width: 100px; height: 100px;" >
+                        {% endif %}
                         <div class="testimonial-text bg-white p-4 mt-n5">
-                            <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
-                            </p>
-                            <h5 class="text-truncate">{{ u.email }}</h5>
-                            <span>{{ u.profesional }}</span>
+                            <p class="mt-5">{{ c.body }}</p>
+                            <h5 class="text-truncate">{{ c.author.firstname }}</h5>
+                            <span>{{ c.author.usertype }}</span>
                         </div>
                     </div>
                     {% endfor %}
