@@ -24,10 +24,10 @@
                 <div class="col-lg-3 mt-5 mt-lg-0">
                     <!-- Author Bio -->
                     <div class="d-flex flex-column text-center bg-white mb-5 py-5 px-4">
-                        <img src="img/user.jpg" class="img-fluid mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-primary mb-3">John Doe</h3>
-                        
-                        <p>data : {{data}}</p>
+                        {% if myarticle.author.image %}
+                        <img src="{{ myarticle.author.image.url }}" alt="{{ myarticle.author.firstname }}" class="img-fluid mx-auto mb-3" style="width: 100px;">
+                        {% endif %}
+                        <h3 class="text-primary mb-3">{{ myarticle.author.firstname }}</h3>
                         <div class="d-flex justify-content-center">
                             <a class="text-primary px-2" href="">
                                 <i class="fab fa-facebook-f"></i>
@@ -109,32 +109,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-    
-                    <!-- Recent Post -->
-                    <div class="mb-5">
-                        <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h4>
-                        <a class="d-flex align-items-center text-decoration-none bg-white mb-3" href="">
-                            <img class="img-fluid" src="img/blog-100x100.jpg" alt="">
-                            <div class="pl-3">
-                                <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                                <small>Jan 01, 2050</small>
-                            </div>
-                        </a>
-                        <a class="d-flex align-items-center text-decoration-none bg-white mb-3" href="">
-                            <img class="img-fluid" src="img/blog-100x100.jpg" alt="">
-                            <div class="pl-3">
-                                <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                                <small>Jan 01, 2050</small>
-                            </div>
-                        </a>
-                        <a class="d-flex align-items-center text-decoration-none bg-white mb-3" href="">
-                            <img class="img-fluid" src="img/blog-100x100.jpg" alt="">
-                            <div class="pl-3">
-                                <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                                <small>Jan 01, 2050</small>
-                            </div>
-                        </a>
                     </div>
     
                     <!-- Tag Cloud -->

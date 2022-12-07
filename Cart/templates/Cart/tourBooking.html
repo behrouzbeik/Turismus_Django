@@ -1,0 +1,278 @@
+{% extends '_base.html' %}
+{% load home_test %}
+{% load static %}
+{% load djmoney %}
+{% block title %}Beik Travel - Tour Booking{% endblock %}
+{% block static%}
+
+<!-- Favicon <link href="img/favicon.ico" rel="icon">-->
+<link href="{ static 'img/favicon.ico' }" rel="icon" />
+<!-- Libraries Stylesheet -->
+<link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+<link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/newstyle.css' %}" rel="stylesheet">
+
+{%endblock%}
+{% block body %}
+
+<!-- Blog Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row pb-3">
+                    <div class="col-md-12 mb-4 pb-2">
+                        <div class="row pb-3">
+                            <div class="col-md-12 blog-item d-flex mb-4">
+                                <div class="position-relative col-md-3 pl-0">
+                                    <img class="img-fluid bloglistitem" src="{{ tour.image.url }}" alt="{{ tour.name }}">
+                                    <div class="blog-date">
+                                        <i class="fa fa-star gold"></i>
+                                        <bold class="font-weight-bold text-white text-uppercase">{{ tour.hotel.residence.graid_star }}</bold>
+                                    </div>
+                                </div>
+                                <div class="bg-white col-md-9">
+                                    <div class="p-4">
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <small class="m-0">
+                                                <i class="fa fa-map-marker-alt text-primary mr-2"></i>
+                                                {{ tour.transportGo.distination.city }}</small>
+                                            <small class="m-0">
+                                                <i class="fa fa-calendar-alt text-primary mr-2"></i>
+                                                {{ tour.buyscore }} Buy Score</small>
+                                            <small class="m-0">
+                                                <i class="fa fa-user text-primary mr-2"></i>{{ tour.capacity }}</small>
+                                        </div>
+                                        <a class="h5 text-decoration-none" href="">{{ tour.name }}</a>
+                                        <div class="d-flex justify-content-between mb-3 border-top mt-4 pt-4">
+                                            <img class="col-2" src="{{tour.transportGo.company.logo.url}}" alt="{{tour.transportGo.company.name}}">
+                                            <div>
+                                                <span class="m-2">{{ tour.transportGo.beginning.city.city }}</span>
+                                                <small class="m-2">{{ tour.transportGo.starttime.time }}</small>
+                                            </div>
+                                            <span class="m-2"><i class='fa fa-{% if t.beginning.type == "Pl" %}plane
+                                                                            {% elif t.beginning.type == "Cr" %}ship
+                                                                            {% elif t.beginning.type == "Bu" %}bus
+                                                                            {% elif t.beginning.type == "Tr" %}train
+                                                                            {% endif %} 
+                                                                            text-primary mr-2'></i></span>
+                                            <svg viewBox="0 0 100 1" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="2" cy="0" r="1" stroke="gray"/>
+                                                <line x1="3" y1="0" x2="97" y2="0" stroke="gray" />
+                                                <circle cx="98" cy="0" r="1" stroke="gray"/>
+                                            </svg>
+                                            
+                                            <div>
+                                                <span class="m-2">{{ tour.transportGo.distination.city.city }}</span>
+                                                <small class="m-2">{{ tour.transportGo.recivetime.time }}</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <img class="col-2" src="{{tour.transportBack.company.logo.url}}" alt="{{tour.transportBack.company.name}}">
+                                            <div>
+                                                <span class="m-2">{{ tour.transportBack.beginning.city.city }}</span>
+                                                <small class="m-2">{{ tour.transportBack.starttime.time }}</small>
+                                            </div>
+                                            <span class="m-2"><i class='fa fa-{% if t.beginning.type == "Pl" %}plane
+                                                                            {% elif t.beginning.type == "Cr" %}ship
+                                                                            {% elif t.beginning.type == "Bu" %}bus
+                                                                            {% elif t.beginning.type == "Tr" %}train
+                                                                            {% endif %} 
+                                                                            text-primary mr-2'></i></span>
+                                            <svg viewBox="0 0 100 1" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="2" cy="0" r="1" stroke="gray"/>
+                                                <line x1="3" y1="0" x2="97" y2="0" stroke="gray" />
+                                                <circle cx="98" cy="0" r="1" stroke="gray"/>
+                                            </svg>
+                                            <div>
+                                                <span class="m-2">{{ tour.transportBack.distination.city.city }}</span>
+                                                <small class="m-2">{{ tour.transportBack.recivetime.time }}</small>
+                                            </div>
+                                        </div>
+                                        <div class="border-top mt-4 pt-4">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="m-0"><i class="fa fa-star text-primary mr-2">
+                                                    </i>{{ tour.userscore }} <small>(250)</small></h6>
+                                                <h6 class="m-0">{{ tour.price }} </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row pb-3">
+                            <div class="col-md-12 blog-item d-flex mb-4">
+                                <div class="bg-white col-md-10">
+                                    <div class="bg-white mb-3" style="padding: 30px;">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Unic Id</th>
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Birthday</th>
+                                                <th scope="col">OP</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for c in cart %}
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>{{ c.variant.name }}</td>
+                                                    <td>{{ c.variant.id }}</td>
+                                                    <td>
+                                                        <i class="fa fa-angle-up" onclick="add('{{ c.variant.id }}')"></i>
+                                                        <input type="number" id="number{{ c.variant.id }}" value="{{ c.quantity }}" max="{{ c.variant.amount }}">
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </td>
+                                                    <td>{{ c.variant.unit_price }}</td>
+                                                    <td><a href="{% url 'cart:remove' c.variant.id %}">remove</a></td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <hr/>
+                                        <form class="mt-5" action="" method="post">
+                                            {% csrf_token %}
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="uid">Unic Id *</label>
+                                                            <input name="uid" id="uid" type="input" value="{{ request.user.unicid }}">
+                                                        </td>
+                                                        <td>
+                                                            <label for="gen">Gender *</label>
+                                                            <input name="gen" id="gen"></input>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="fname">First Name *</label>
+                                                            <input name="fname" id="lname"></input>
+                                                        </td>
+                                                        <td>
+                                                            <label for="lname">Last Name *</label>
+                                                            <input name="lname" id="lname"></input>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="birthday">Birthday *</label><br/>
+                                                            <input type="date" name="birthday" id="birthday"></input>
+                                                        </td>
+                                                        <td>
+                                                            <br/>
+                                                            <input type="submit" value="ADD"
+                                                                    class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-2 pl-0">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="col-lg-3 order-lg-first mt-5 mt-lg-0">
+                <!-- Author Bio -->
+                <!-- Search Form -->
+                <div class="mb-5">
+                    <div class="bg-white" style="padding: 30px;">
+                        <div class="input-group">
+                            <input type="text" class="form-control p-4" placeholder="Keyword">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-primary border-primary text-white"><i
+                                        class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Category List -->
+                <div class="mb-5">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Categories</h4>
+                    <div class="bg-white" style="padding: 30px;">
+                        <ul class="list-inline m-0">
+                            <li class="mb-3 d-flex justify-content-between align-items-center">
+                                <a class="text-dark" href="#">
+                                    <i class="fa fa-angle-right text-primary mr-2"></i>
+                                    Tour
+                                </a>
+                                <span class="badge badge-primary badge-pill">{{ counter.tour }}</span>
+                            </li>
+                            <li class="mb-3 d-flex justify-content-between align-items-center">
+                                <a class="text-dark" href="#">
+                                    <i class="fa fa-angle-right text-primary mr-2"></i>
+                                    Residence
+                                </a>
+                                <span class="badge badge-primary badge-pill">{{ counter.residence }}</span>
+                            </li>
+                            <li class="mb-3 d-flex justify-content-between align-items-center">
+                                <a class="text-dark" href="#">
+                                    <i class="fa fa-angle-right text-primary mr-2"></i>
+                                    Airplane
+                                </a>
+                                <span class="badge badge-primary badge-pill">{{ counter.airplane }}</span>
+                            </li>
+                            <li class="mb-3 d-flex justify-content-between align-items-center">
+                                <a class="text-dark" href="#">
+                                    <i class="fa fa-angle-right text-primary mr-2"></i>
+                                    Train
+                                </a>
+                                <span class="badge badge-primary badge-pill">{{ counter.train }}</span>
+                            </li>
+                            <li class="mb-3 d-flex justify-content-between align-items-center">
+                                <a class="text-dark" href="#">
+                                    <i class="fa fa-angle-right text-primary mr-2"></i>
+                                    Cruise
+                                </a>
+                                <span class="badge badge-primary badge-pill">{{ counter.cruise }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                <a class="text-dark" href="#">
+                                    <i class="fa fa-angle-right text-primary mr-2"></i>
+                                    Bus
+                                </a>
+                                <span class="badge badge-primary badge-pill">{{ counter.bus }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Tag Cloud -->
+                <div class="mb-5">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h4>
+                    <div class="d-flex flex-wrap m-n1">
+                        <a href="" class="btn btn-light m-1">Travel</a>
+                        <a href="" class="btn btn-light m-1">Turism</a>
+                        <a href="" class="btn btn-light m-1">Hotel</a>
+                        <a href="" class="btn btn-light m-1">Air plan</a>
+                        <a href="" class="btn btn-light m-1">Train</a>
+                        <a href="" class="btn btn-light m-1">Cruise</a>
+                        <a href="" class="btn btn-light m-1">Residence</a>
+                        <a href="" class="btn btn-light m-1">Bus</a>
+                        <a href="" class="btn btn-light m-1">Tour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+{% endblock %}

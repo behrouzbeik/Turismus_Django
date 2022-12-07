@@ -42,8 +42,6 @@ def index(request):
     for a in newestArticles:
         if a.status == 'pub':
             articles.append(MyArticles(a))
-
-
     # myCompanyInfo = MyCompanyInfo.objects.get(company_name='Behrouz Travel')
     selectedArticle = SpecialPosition.objects.get(title='Homepage')
     homePageArticle = MyArticle(Article.objects.get(id=selectedArticle.article.id))
@@ -80,10 +78,32 @@ def index(request):
     return (render(request,'Home/index.html', context))
 
 def about(request):
-    return (render(request,'Home/about.html'))
+    selectedArticle = SpecialPosition.objects.get(title='About')
+    homePageArticle = MyArticle(Article.objects.get(id=selectedArticle.article.id))
+    Guides = CustomUser.objects.filter(usertype='Gu').order_by('-id')
+    context = {
+        'myarticle' : homePageArticle,
+        'Guides':Guides,
+    }
+    return (render(request,'Home/about.html', context))
+
+
+def contact(request):
+    selectedArticle = SpecialPosition.objects.get(title='contact')
+    homePageArticle = MyArticle(Article.objects.get(id=selectedArticle.article.id))
+    Guides = CustomUser.objects.filter(usertype='Gu').order_by('-id')
+    context = {
+        'myarticle' : homePageArticle,
+        'Guides':Guides,
+    }
+    return (render(request,'Home/contact.html', context))
 
 def services(request):
-    return (render(request,'Home/service.html'))#service
+    comments = Comment.objects.filter(active=True).order_by('-id')[:6]
+    context = {
+        'comments':comments,
+    }
+    return (render(request,'Home/service.html',context))#service
 
 def package(request):
     tour = Tour.objects.all().order_by('-id')

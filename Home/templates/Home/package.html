@@ -50,7 +50,7 @@
                                 <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>{{ t.tour_duration }} days</small>
                                 <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>{{ t.capacity }}</small>
                             </div>
-                            <a class="h5 text-decoration-none" href="">{{ t.short_description }}</a>
+                            <a class="h5 text-decoration-none" href="{% url 'Blog:blogdetail' t.detail_article.id %}">{{ t.short_description }}</a>
                             <div class="border-top mt-4 pt-4">
                                 <div class="d-flex justify-content-between">
                                     <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>{{ t.userscore }} <small>(250)</small></h6>

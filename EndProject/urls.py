@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Home.urls',namespace='Home')),
     path('Account/',include('Account.urls',namespace='Account')),
-    path('Blog/', include('Blog.urls', namespace='Blog'))
+    path('Blog/', include('Blog.urls', namespace='Blog')),
+    path('Cart/', include('Cart.urls', namespace='Cart')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

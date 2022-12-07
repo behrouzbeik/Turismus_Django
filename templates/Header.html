@@ -59,7 +59,7 @@
                                 <a href="{% url 'Home:transport' %}" class="dropdown-item">Transport</a>
                             </div>
                         </div>
-                        <a href="{% url 'Home:about' %}" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'Home:contact' %}" class="nav-item nav-link">Contact</a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'Account:logout' %}" class="nav-item nav-link active">Logout</a>
                     {% else %}

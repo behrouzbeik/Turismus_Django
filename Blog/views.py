@@ -47,7 +47,6 @@ def bloglist(request):
 
 
 def blogdetail(request, articleid):
-
     class counter():
         tour = Tour.objects.all().count()
         airplane = Transport.objects.filter(beginning__type='Pl').count()
@@ -55,7 +54,6 @@ def blogdetail(request, articleid):
         bus = Transport.objects.filter(beginning__type='BU').count()
         cruise = Transport.objects.filter(beginning__type='Cr').count()
         residence = Residence.objects.all().count()
-
     class MyArticle:
         def __init__(self, selectarticle):
             self.id = selectarticle.id
