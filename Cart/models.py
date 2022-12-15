@@ -4,15 +4,15 @@ from Account.models import CustomUser
 
 # Create your models here.
 class Order (models.Model):
-    orderno = models.CharField ( max_length=10,unique=True )
-    ordertime  =  models.DateTimeField ( auto_now_add=True )
-    tour  =  models.ForeignKey ( Tour,on_delete=models.CASCADE,blank=True,null=True )
-    transport  =  models.ForeignKey ( Transport,on_delete=models.CASCADE,blank=True,null=True )
-    room  =  models.ForeignKey ( Room,on_delete=models.CASCADE,blank=True,null=True )
-    adult = models.PositiveIntegerField(  )
-    child = models.PositiveIntegerField(blank=True,null=True)
+    orderno= models.CharField ( max_length=10,unique=True )
+    ordertime=models.DateTimeField ( auto_now_add=True )
+    tour=models.ForeignKey ( Tour,on_delete=models.CASCADE,blank=True,null=True )
+    transport=models.ForeignKey ( Transport,on_delete=models.CASCADE,blank=True,null=True )
+    room =models.ForeignKey ( Room,on_delete=models.CASCADE,blank=True,null=True )
+    adult=models.PositiveIntegerField(  )
+    child=models.PositiveIntegerField(blank=True,null=True)
     baby=models.PositiveIntegerField(blank=True,null=True)
-    user  =  models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
+    user=models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
 
     def __str__(self):
         return self.orderno
@@ -57,6 +57,11 @@ class Cart (models.Model):
     user  =  models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
 
 
+class cart_User_Rel (models.Model):
+    cart = models.ForeignKey( Cart, on_delete=models.CASCADE, related_name='cart_rel', blank=True,null=True  )
+    traveler = models.ForeignKey (CustomUser, on_delete=models.CASCADE, related_name='uc_rel', blank=True,null=True)
+
+
 class Order_User_Rel (models.Model):
-    order = models.ManyToManyField( Order,related_name='order_rel'  )
-    traveler = models.ManyToManyField (CustomUser,related_name='user_rel')
+    order = models.ForeignKey( Order, on_delete=models.CASCADE, related_name='order_rel', blank=True,null=True  )
+    traveler = models.ForeignKey (CustomUser, on_delete=models.CASCADE, related_name='uo_rel', blank=True,null=True)

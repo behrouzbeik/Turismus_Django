@@ -120,18 +120,22 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {% for c in cart %}
+                                            {% for c in traveler %}
                                                 <tr>
                                                     <th scope="row">1</th>
-                                                    <td>{{ c.variant.name }}</td>
-                                                    <td>{{ c.variant.id }}</td>
-                                                    <td>
+                                                    <td>{{ c.traveler.unicid }}</td>
+                                                    <td>{{ c.traveler.firstname }}</td>
+                                                    <!-- <td>
                                                         <i class="fa fa-angle-up" onclick="add('{{ c.variant.id }}')"></i>
                                                         <input type="number" id="number{{ c.variant.id }}" value="{{ c.quantity }}" max="{{ c.variant.amount }}">
                                                         <i class="fa fa-angle-down"></i>
+                                                    </td> -->
+                                                    <td>{{ c.traveler.lastname }}</td>
+                                                    <td>{{ c.traveler.birthday }}</td>
+                                                    <td><input type="submit" value="Remove" action="url 'cart:travelerRemove' {{ cart.id }} {{ c.traveler.unicid }}"
+                                                        class="btn btn-primary py-1 px-1">
+                                                        <a href="{% url 'Cart:travelerRemove' cart.id c.traveler.unicid %}" class="btn btn-primary py-1 px-1">Remove</a>
                                                     </td>
-                                                    <td>{{ c.variant.unit_price }}</td>
-                                                    <td><a href="{% url 'cart:remove' c.variant.id %}">remove</a></td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>

@@ -171,7 +171,7 @@ class Tour (models.Model):
     capacity = models.PositiveBigIntegerField(blank=True,null=True)
     home_page_display = models.BooleanField(default=False)
     short_description = models.CharField(max_length=50, blank=True, null=True)
-    detail_article = models.ForeignKey(Article, on_delete=models.CASCADE, blank=True, null=True)
+    detail_article = models.ForeignKey(Article, on_delete=models.CASCADE, blank=True, null=True, related_name='Bookit')
 
     def __str__(self):
         return self.name

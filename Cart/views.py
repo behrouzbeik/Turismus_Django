@@ -1,56 +1,26 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from Home.models import *
-# Create your views here.
-
-class MyTraveler:
-    def __init__(self, selectarticle):
-        self.tour  =  models.ForeignKey ( Tour,on_delete=models.CASCADE,blank=True,null=True )
-        self.transport  =  models.ForeignKey ( Transport,on_delete=models.CASCADE,blank=True,null=True )
-        self.room  =  models.ForeignKey ( Room,on_delete=models.CASCADE,blank=True,null=True )
-        self.adult = models.PositiveIntegerField(  )
-        self.child = models.PositiveIntegerField(blank=True,null=True)
-        self.baby = models.PositiveIntegerField(blank=True,null=True)
-        self.user  =  models.ForeignKey ( CustomUser,on_delete=models.CASCADE )
-        self.traveler = 1
-
-
-class MyCart:
-    def __init__(self, selectObject, objectType, userid):
-        if objectType == "tour" :
-            self.tour=Tour.objects.get(Tour_id=selectObject.id)
-            self.transport={}
-            self.room={}
-        elif objectType=="transport":
-            self.tour={}
-            self.transport=Transport.objects.get(Transport_id=selectObject.id)
-            self.room={}
-        elif objectType=="room":
-            self.tour={}
-            self.transport={}
-            self.room=Room.objects.get(Room_id=selectObject.id)
-        if objectType=="transport":
-            self.transport=Transport.objects.get(Transport_id=selectObject.id)
-        self.adult=0 
-        self.child=0
-        self.baby =0
-        self.user =CustomUser.objects.get(CustomUser_id=userid)
-        self.traveler={}
-
-        self.parts = ArticlePart.objects.filter(article_id=selectarticle.id).order_by('partOrder')
-        # print('selectarticle.id', self.parts[0].partTitle)
-        self.images = ArticleImg.objects.filter(article_id=selectarticle.id).order_by('imgOrder')
-        self.links = ArticleLink.objects.filter(article_id=selectarticle.id).order_by('linkOrder')
-        self.title = selectarticle.title
-        self.frame = selectarticle.frame.htmlFileName
-        # print('page', self.frame.htmlFileName)
-        self.create = selectarticle.create
-        self.month = (datetime.datetime.strptime(str(self.create.month), "%m")).strftime("%b")
-        self.update = selectarticle.update
-        self.author = selectarticle.author
-        self.status = selectarticle.status
+from .models import *
 
 def tourbooking(request,tourid):
-    tour = Tour.objects.get(id=tourid)
+    if request.method == 'POST':
+        pass
+    else:
+        tour = Tour.objects.get(id=tourid)
+        user = request.user
+        cart = Cart(tour=Tour.objects.get(id=tourid), adult=1, child=0, baby=0, user=CustomUser(id=request.user.id))
+        cart.save()
+        cur = cart_User_Rel(cart=cart, traveler=CustomUser(id=request.user.id))
+        cur.save()
+        traveler = cart_User_Rel.objects.filter(cart_id=cart.id)
 
-    context = {'tour':tour}
+    context = {'tour':tour, 'user':user, 'cur':cur, 'cart':cart, 'traveler':traveler}
     return (render(request,'Cart/tourBooking.html', context))
+
+
+
+def travelerRemove(request,cartid,unicid):
+    cur = cart_User_Rel.objects.get(cart_id=cartid, traveler_unicid=unicid)
+    print(cur)
+    cur.delete()
+    return  redirect('Cart:tourBooking')
