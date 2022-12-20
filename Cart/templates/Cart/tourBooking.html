@@ -120,7 +120,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {% for c in traveler %}
+                                            {% for c in travelers %}
                                                 <tr>
                                                     <th scope="row">1</th>
                                                     <td>{{ c.traveler.unicid }}</td>
@@ -132,9 +132,7 @@
                                                     </td> -->
                                                     <td>{{ c.traveler.lastname }}</td>
                                                     <td>{{ c.traveler.birthday }}</td>
-                                                    <td><input type="submit" value="Remove" action="url 'cart:travelerRemove' {{ cart.id }} {{ c.traveler.unicid }}"
-                                                        class="btn btn-primary py-1 px-1">
-                                                        <a href="{% url 'Cart:travelerRemove' cart.id c.traveler.unicid %}" class="btn btn-primary py-1 px-1">Remove</a>
+                                                    <td><a href="{ url 'Cart:travelerRemove' cart.id c.traveler.unicid %}" class="btn btn-primary py-1 px-1">Remove</a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}
@@ -278,5 +276,26 @@
     </div>
 </div>
 <!-- Blog End -->
+<!-- <ul>
+    <li>unicid: <span id="unicid"></span></li>
+    <li>fname: <span id="fname"></span></li>
+    <li>lname: <span id="lname"></span></li>
+    <li>: <span id="total"></span></li>
+</ul>
+<script>
+    function show(){
+    $.ajax({
+        url : '{ url 'Cart:show' %}'
+        type: 'GET',
+        success:function (response){
+            $('#unicid').html(response.travelers_0.unicid);
+            $('#fname').html(response.travelers_0.firstname);
+            $('#lname').html(response.travelers_0.lastname);
+            
+
+        }
+    })
+    }
+</script> -->
 
 {% endblock %}

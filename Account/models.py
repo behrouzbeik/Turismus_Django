@@ -33,7 +33,6 @@ class CustomUser (AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     date_joined = models.DateTimeField(blank=True, null=True)
 
-
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []

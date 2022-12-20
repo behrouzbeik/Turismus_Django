@@ -6,4 +6,5 @@ app_name='Cart'
 urlpatterns = [
     path('tourBooking/<int:tourid>/',views.tourbooking,name='tourbooking'),
     path('travelerRemove/<int:cartid>/<str:unicid>/',views.travelerRemove,name='travelerRemove'),
+    # path('show/',views.cart_show,name='show'),
 ]
