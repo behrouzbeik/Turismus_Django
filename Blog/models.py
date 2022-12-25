@@ -18,6 +18,13 @@ class Article(models.Model):
         ('pub' , 'Published'),
         ('drf', 'Draft'),
     )
+    PRODUCT_STARS = [
+        ('1' , 'Very Bad'),
+        ('2', 'Bad'),
+        ('3', 'Normal'),
+        ('4', 'Good'),
+        ('5', 'Perfect'),
+    ]
     title = models.CharField(max_length=50)
     frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
     create = models.DateTimeField(auto_now_add=True)
@@ -28,6 +35,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def userscore(self):
+        comments = Comment.objects.filter(Article=self)
 
 
 class ArticlePart(models.Model):
