@@ -37,7 +37,21 @@ class Article(models.Model):
         return self.title
 
     def userscore(self):
-        comments = Comment.objects.filter(Article=self)
+        comments = Comment.objects.filter(article=self)
+        if comments.count()==0: 
+            return(0)
+        else:
+            sum=0
+            for c in comments:
+                sum+=int(c.stars)
+            return(sum/comments.count())
+
+    def numberOfComments(self):
+        comments = Comment.objects.filter(article=self)
+        if comments.count()==0:
+            return(0)
+        else:
+            return(Comment.objects.filter(article=self).count())
 
 
 class ArticlePart(models.Model):

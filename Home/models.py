@@ -162,7 +162,7 @@ class Tour (models.Model):
     transportBack = models.ForeignKey ( Transport,on_delete=models.CASCADE,related_name='tr_ba' )
     hotel = models.ForeignKey ( Room,on_delete=models.CASCADE )
     image = models.ImageField (upload_to='Tour', blank=True, null=True)
-    userscore = models.FloatField(default=0)
+    # userscore = models.FloatField(default=0)
     description = models.TextField ( blank=True,null=True, )
     price = MoneyField(max_digits=14, decimal_places=2, default_currency='IRR')
     discount = models.fields.PositiveIntegerField ( blank=True,null=True )
@@ -179,6 +179,13 @@ class Tour (models.Model):
     def tour_duration(self):
         timediff = self.transportBack.recivetime - self.transportGo.starttime
         return timediff.days
+
+    def userscore(self):
+        return(self.detail_article.userscore())
+
+    def numberOfComments(self):
+        return(self.detail_article.numberOfComments())
+
 
 class MyCompanyInfo (models.Model):
     company_name = models.CharField(max_length=50, default='#')

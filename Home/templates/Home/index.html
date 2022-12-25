@@ -192,7 +192,7 @@
                             <a class="h5 text-decoration-none" href="{% url 'Blog:blogdetail' t.detail_article.id %}">{{ t.short_description }}</a>
                             <div class="border-top mt-4 pt-4">
                                 <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>{{ t.userscore }} <small>(250)</small></h6>
+                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>{{ t.userscore }} <small>({{t.numberOfComments}})</small></h6>
                                     <h6 class="m-0">{% money_localize t.price %} </h6>
                                 </div>
                             </div>
